@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TypeAnalyzer.ViewModel.MVVM;
 
 namespace TypeAnalyzer.ViewModel
 {
@@ -14,25 +15,25 @@ namespace TypeAnalyzer.ViewModel
     public ObservableCollection<TreeItemViewModel> Children { get; } = new ObservableCollection<TreeItemViewModel>() { null };
     public bool TreeViewItemIsExpanded
     {
-      get => m_IsExpanded;
+      get => _isExpanded;
       set
       {
-        m_IsExpanded = value;
-        if (m_WasBuilt)
+        _isExpanded = value;
+        if (_wasBuilt)
           return;
         Children.Clear();
         BuildMyself();
-        m_WasBuilt = true;
+        _wasBuilt = true;
         RaisePropertyChanged();
       }
     }
 
-    private bool m_WasBuilt = false;
-    private bool m_IsExpanded = false;
-    private static Random m_Random = new Random();
-    private void BuildMyself()
+    private bool _wasBuilt = false;
+    private bool _isExpanded = false;
+    private static Random _random = new Random();
+    protected virtual void BuildMyself()
     {
-      int _numberOfChildren = Math.Max(1, m_Random.Next(7));
+      int _numberOfChildren = Math.Max(1, _random.Next(7));
       for (int i = 0; i < _numberOfChildren; i++)
         this.Children.Add(new TreeItemViewModel() { Name = $"sample{i}" });
     }

@@ -27,8 +27,17 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Text="{Binding PathVariable}"/>
-            <TreeView Grid.Row="1" Name="TreeView">
-
+            <TreeView Grid.Row="1" Name="TreeView" ItemsSource="{Binding AssemblyModel}">
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type viewmodel:TreeItemViewModel}">
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="IsExpanded" Value="{Binding TreeViewItemIsExpanded, Mode=TwoWay}"/>
+                    </Style>
+                </TreeView.ItemContainerStyle>
             </TreeView>
         </Grid>
 

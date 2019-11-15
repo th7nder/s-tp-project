@@ -55,10 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\MVVM\RelayCommand.cs" />
     <Compile Include="ViewModel\TreeItemViewModel.cs" />
     <Compile Include="ViewModel\TypeAnalyzerViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\MVVM\ViewModelBase.cs" />
     <Page Include="TypeAnalyzer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

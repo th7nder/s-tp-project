@@ -8,6 +8,7 @@ namespace TypeAnalyzer.Model
 {
   public class TypeMetadata
   {
+    public string Name { get; set; }
     public IEnumerable<PropertyMetadata> PropertyMetadata { get; set; }
   }
 }

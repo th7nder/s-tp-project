@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace TypeAnalyzer.ViewModel
+namespace TypeAnalyzer.ViewModel.MVVM
 {
   public class RelayCommand : ICommand
   {

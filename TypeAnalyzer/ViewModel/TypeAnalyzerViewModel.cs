@@ -1,10 +1,12 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TypeAnalyzer.ViewModel.MVVM;
 
 namespace TypeAnalyzer.ViewModel
 {
@@ -15,8 +17,9 @@ namespace TypeAnalyzer.ViewModel
       BrowseCommand = new RelayCommand(Browse);
     }
 
+    public ObservableCollection<TreeItemViewModel> AssemblyModel { get; set; } = new ObservableCollection<TreeItemViewModel> { new TreeItemViewModel() { Name = "mscore.dll" } };
+
     public ICommand BrowseCommand { get; }
-    private String _pathVariable;
     public string PathVariable
     {
       get => _pathVariable;
@@ -29,7 +32,8 @@ namespace TypeAnalyzer.ViewModel
         }
       }
     }
- 
+
+    private String _pathVariable;
     private void Browse()
     {
       PathVariable = GetPath();
