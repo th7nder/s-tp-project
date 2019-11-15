@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TypeAnalyzer.Model
 {
   public class TypeMetadata
   {
     public string Name { get; set; }
-    public IEnumerable<PropertyMetadata> PropertyMetadata { get; set; }
+    public IEnumerable<PropertyMetadata> Properties { get; set; }
   }
 }

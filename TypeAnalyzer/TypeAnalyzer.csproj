@@ -56,9 +56,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\MVVM\RelayCommand.cs" />
+    <Compile Include="ViewModel\PropertiesViewModel.cs" />
+    <Compile Include="ViewModel\PropertyViewModel.cs" />
     <Compile Include="ViewModel\TreeItemViewModel.cs" />
     <Compile Include="ViewModel\TypeAnalyzerViewModel.cs" />
     <Compile Include="ViewModel\MVVM\ViewModelBase.cs" />
+    <Compile Include="ViewModel\TypeViewModel.cs" />
     <Page Include="TypeAnalyzer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

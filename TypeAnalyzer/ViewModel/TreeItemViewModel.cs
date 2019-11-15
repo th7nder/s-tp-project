@@ -30,12 +30,6 @@ namespace TypeAnalyzer.ViewModel
 
     private bool _wasBuilt = false;
     private bool _isExpanded = false;
-    private static Random _random = new Random();
-    protected virtual void BuildMyself()
-    {
-      int _numberOfChildren = Math.Max(1, _random.Next(7));
-      for (int i = 0; i < _numberOfChildren; i++)
-        this.Children.Add(new TreeItemViewModel() { Name = $"sample{i}" });
-    }
+    protected virtual void BuildMyself() { }
   }
 }
