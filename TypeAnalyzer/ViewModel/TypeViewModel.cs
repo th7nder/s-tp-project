@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TypeAnalyzer.Model;
+﻿using TypeAnalyzer.Model;
 
 namespace TypeAnalyzer.ViewModel
 {
@@ -18,6 +16,7 @@ namespace TypeAnalyzer.ViewModel
     {
       Children.Add(new BaseTypesViewModel(_typeMetadata.BaseTypes));
       Children.Add(new PropertiesViewModel(_typeMetadata.Properties));
+      Children.Add(new MethodsViewModel(_typeMetadata.Methods));
     }
   }
 }

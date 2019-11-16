@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyMetadata.cs" />
+    <Compile Include="MethodMetadata.cs" />
+    <Compile Include="MethodParameterMetadata.cs" />
     <Compile Include="NamespaceMetadata.cs" />
     <Compile Include="PropertyMetadata.cs" />
     <Compile Include="TypeMetadata.cs" />

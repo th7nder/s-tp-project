@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -10,6 +9,7 @@ namespace TypeAnalyzer.Model
     public string Name { get; }
     public IEnumerable<PropertyMetadata> Properties { get; }
     public IEnumerable<TypeMetadata> BaseTypes { get; }
+    public IEnumerable<MethodMetadata> Methods { get; }
     private TypeMetadata(TypeInfo typeInfo)
     {
       types[typeInfo.FullName] = this;
@@ -21,6 +21,9 @@ namespace TypeAnalyzer.Model
                 .Concat(typeInfo.GetType().GetInterfaces())
                 .Where(type => type != null)
                 .Select(type => new TypeMetadata(type.GetTypeInfo()));
+
+      Methods = from method in typeInfo.DeclaredMethods
+                select new MethodMetadata(method);
     }
 
     private static Dictionary<string, TypeMetadata> types = new Dictionary<string, TypeMetadata>();

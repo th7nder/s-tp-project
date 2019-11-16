@@ -57,6 +57,10 @@
     </ApplicationDefinition>
     <Compile Include="ViewModel\AssemblyViewModel.cs" />
     <Compile Include="ViewModel\BaseTypesViewModel.cs" />
+    <Compile Include="ViewModel\MethodParametersViewModel.cs" />
+    <Compile Include="ViewModel\MethodParameterViewModel.cs" />
+    <Compile Include="ViewModel\MethodsViewModel.cs" />
+    <Compile Include="ViewModel\MethodViewModel.cs" />
     <Compile Include="ViewModel\MVVM\RelayCommand.cs" />
     <Compile Include="ViewModel\NamespaceViewModel.cs" />
     <Compile Include="ViewModel\PropertiesViewModel.cs" />
