@@ -35,14 +35,7 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       Children.Add(new DetailViewModel("Access Level: ", _methodMetadata.AccessModifier.ToString()));
       Children.Add(new DetailViewModel("Return type: ", _methodMetadata.ReturnType.Name, new TypeViewModel(_methodMetadata.ReturnType)));
 
-      IEnumerable<TreeItemViewModel> genericModels = from genericArgument in _methodMetadata.GenericArguments
-                                                     select new TypeViewModel(genericArgument);
-
-      if (genericModels.Any())
-      {
-        Children.Add(new DetailViewModel("Generic parameters", "", genericModels.ToList()));
-      }
-
+      Children.Add(new GenericParametersViewModel(_methodMetadata.GenericArguments));
       Children.Add(new MethodParametersViewModel(_methodMetadata.Parameters));
       Children.Add(new AttributesViewModel(_methodMetadata.Attributes));  
     }

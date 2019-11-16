@@ -24,6 +24,8 @@ namespace TypeAnalyzer.Model
     public IEnumerable<TypeMetadata> TypeParameters { get; }
     [DataMember]
     public IEnumerable<TypeMetadata> TypeArguments { get; }
+    [DataMember]
+    public IEnumerable<TypeMetadata> GenericArguments { get; }
     [DataMember] 
     public AccessModifier AccessModifier { get; set; }
     [DataMember]
@@ -57,6 +59,8 @@ namespace TypeAnalyzer.Model
                       select Analyze(typeArgument.GetTypeInfo());
       
       AccessModifier = typeInfo.GetAccessModifier();
+      GenericArguments = from generic in typeInfo.GetGenericArguments()
+                         select Analyze(generic.GetTypeInfo());
 
       Name = GetTypeSignature(typeInfo.Name);
       IsPlaceholder = isPlaceholder;

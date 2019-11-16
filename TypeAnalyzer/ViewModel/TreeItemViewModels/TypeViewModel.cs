@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TypeAnalyzer.Model;
+﻿using TypeAnalyzer.Model;
 
 namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 {
@@ -30,6 +28,7 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       Children.Add(new DetailViewModel("Is Sealed: ", _typeMetadata.IsSealed.ToString()));
       
       Children.Add(new BaseTypesViewModel(_typeMetadata.BaseTypes));
+      Children.Add(new GenericParametersViewModel(_typeMetadata.GenericArguments));
       Children.Add(new AttributesViewModel(_typeMetadata.Attributes));
       Children.Add(new PropertiesViewModel(_typeMetadata.Properties));
       Children.Add(new MethodsViewModel(_typeMetadata.Methods));

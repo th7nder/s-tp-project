@@ -41,7 +41,7 @@ namespace TypeAnalyzer.Examples
       return a + b;
     }
 
-    private sealed class NestedPrivate
+    private sealed class NestedPrivate<K>
     {
       private void PrivateMethod<T>(T a, T b)
       {
