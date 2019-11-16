@@ -43,7 +43,10 @@ namespace TypeAnalyzer.Examples
 
     private class NestedPrivate
     {
-      
+      private void PrivateMethod()
+      {
+        
+      }
     }
   }
 }

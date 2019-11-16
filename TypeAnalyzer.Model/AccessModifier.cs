@@ -19,6 +19,22 @@ namespace TypeAnalyzer.Model
 
             return AccessModifier.None;
         }
+
+        public static AccessModifier GetAccessModifier(this MethodInfo methodInfo)
+        {
+            if (methodInfo.IsPrivate)
+                return AccessModifier.Private;
+            if (methodInfo.IsFamily)
+                return AccessModifier.Protected;
+            if (methodInfo.IsFamilyOrAssembly)
+                return AccessModifier.ProtectedInternal;
+            if (methodInfo.IsAssembly)
+                return AccessModifier.Internal;
+            if (methodInfo.IsPublic)
+                return AccessModifier.Public;
+            
+            return AccessModifier.None;
+        }
     }
 
     [DataContract]
