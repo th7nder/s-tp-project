@@ -17,7 +17,7 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
     {
       Children.Add(new DetailViewModel("Name: ", _propertyMetadata.Name));
       Children.Add(new DetailViewModel("Access Level: ", _propertyMetadata.AccessModifier.ToString()));
-      Children.Add(new TypeViewModel(_propertyMetadata.TypeMetadata));
+      Children.Add(new DetailViewModel("Type: ", _propertyMetadata.TypeMetadata.Name, new TypeViewModel(_propertyMetadata.TypeMetadata)));
 
       if (_propertyMetadata.Attributes.Any())
       {
