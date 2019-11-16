@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace TypeAnalyzer.Model
 {
@@ -20,12 +21,18 @@ namespace TypeAnalyzer.Model
         }
     }
 
+    [DataContract]
     public enum AccessModifier
     {
+        [EnumMember]
         Private,
+        [EnumMember]
         Protected,
+        [EnumMember]
         ProtectedInternal,
+        [EnumMember]
         Internal,
+        [EnumMember]
         Public,
         None
     }
