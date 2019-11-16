@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyMetadata.cs" />
+    <Compile Include="NamespaceMetadata.cs" />
     <Compile Include="PropertyMetadata.cs" />
     <Compile Include="TypeMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

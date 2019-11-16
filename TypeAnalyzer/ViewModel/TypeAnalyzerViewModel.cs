@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Windows.Input;
 using TypeAnalyzer.ViewModel.MVVM;
 
@@ -12,25 +13,6 @@ namespace TypeAnalyzer.ViewModel
     public TypeAnalyzerViewModel()
     {
       BrowseCommand = new RelayCommand(Browse);
-
-      var typeMetadata = new Model.TypeMetadata
-      {
-        Name = "Macbook"
-      };
-     
-      var properties = new List<Model.PropertyMetadata>
-        {
-          new Model.PropertyMetadata
-          {
-            Name = "Price",
-            TypeMetadata = typeMetadata
-          }
-        };
-
-      typeMetadata.Properties = properties;
-
-      var typeViewModel = new TypeViewModel(typeMetadata);
-      AssemblyModel.Add(typeViewModel);
     }
 
     public ObservableCollection<TreeItemViewModel> AssemblyModel { get; set; } = new ObservableCollection<TreeItemViewModel>();
@@ -45,11 +27,13 @@ namespace TypeAnalyzer.ViewModel
         {
           _pathVariable = value;
           RaisePropertyChanged();
+          AssemblyViewModel model = new AssemblyViewModel(new Model.AssemblyMetadata(Assembly.LoadFrom(_pathVariable)));
+          AssemblyModel.Add(model);
         }
       }
     }
 
-    private String _pathVariable;
+    private string _pathVariable;
     private void Browse()
     {
       PathVariable = GetPath();

@@ -1,8 +1,16 @@
-﻿namespace TypeAnalyzer.Model
+﻿using System.Reflection;
+
+namespace TypeAnalyzer.Model
 {
   public class PropertyMetadata
   {
-    public string Name { get; set; }
-    public TypeMetadata TypeMetadata { get; set; }
+
+    public string Name { get; }
+    public TypeMetadata TypeMetadata { get;  }
+    public PropertyMetadata(PropertyInfo property)
+    {
+      Name = property.Name;
+      TypeMetadata = TypeMetadata.Analyze(property.PropertyType.GetTypeInfo());
+    }
   }
 }
