@@ -1,8 +1,8 @@
 ﻿using TypeAnalyzer.Model;
 
-namespace TypeAnalyzer.ViewModel
+namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 {
-  internal class NamespaceViewModel : TreeItemViewModel
+  public class NamespaceViewModel : TreeItemViewModel
   {
     private NamespaceMetadata _namespaceMetadata;
 

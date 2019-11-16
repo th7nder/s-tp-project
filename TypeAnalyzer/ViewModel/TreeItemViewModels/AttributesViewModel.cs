@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TypeAnalyzer.Model;
 
-namespace TypeAnalyzer.ViewModel
+namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 {
   class AttributesViewModel : TreeItemViewModel
   {

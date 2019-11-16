@@ -55,23 +55,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\AssemblyViewModel.cs" />
-    <Compile Include="ViewModel\AttributesViewModel.cs" />
-    <Compile Include="ViewModel\AttributeViewModel.cs" />
-    <Compile Include="ViewModel\BaseTypesViewModel.cs" />
-    <Compile Include="ViewModel\MethodParametersViewModel.cs" />
-    <Compile Include="ViewModel\MethodParameterViewModel.cs" />
-    <Compile Include="ViewModel\MethodsViewModel.cs" />
-    <Compile Include="ViewModel\MethodViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\AssemblyViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\AttributesViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\AttributeViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\BaseTypesViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\MethodParametersViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\MethodParameterViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\MethodsViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\MethodViewModel.cs" />
     <Compile Include="ViewModel\MVVM\RelayCommand.cs" />
-    <Compile Include="ViewModel\NamespaceViewModel.cs" />
-    <Compile Include="ViewModel\PropertiesViewModel.cs" />
-    <Compile Include="ViewModel\PropertyViewModel.cs" />
-    <Compile Include="ViewModel\DetailViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\NamespaceViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\PropertiesViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\PropertyViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\DetailViewModel.cs" />
     <Compile Include="ViewModel\TreeItemViewModel.cs" />
     <Compile Include="ViewModel\TypeAnalyzerViewModel.cs" />
     <Compile Include="ViewModel\MVVM\ViewModelBase.cs" />
-    <Compile Include="ViewModel\TypeViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\TypeViewModel.cs" />
     <Page Include="TypeAnalyzer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -117,5 +117,6 @@
       <Name>TypeAnalyzer.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

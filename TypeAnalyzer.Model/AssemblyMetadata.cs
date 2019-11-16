@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace TypeAnalyzer.Model
 {
+  [DataContract]
   public class AssemblyMetadata
   {
+    [DataMember]
     public IEnumerable<NamespaceMetadata> Namespaces { get; }
+    [DataMember]
     public string Name { get; }
     public AssemblyMetadata(Assembly assembly)
     {

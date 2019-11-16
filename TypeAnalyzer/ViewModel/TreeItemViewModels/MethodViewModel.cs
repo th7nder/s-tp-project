@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TypeAnalyzer.Model;
 
-namespace TypeAnalyzer.ViewModel
+namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 {
   class MethodViewModel : TreeItemViewModel
   {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TypeAnalyzer.Model;
 
-namespace TypeAnalyzer.ViewModel
+namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 {
     class BaseTypesViewModel : TreeItemViewModel
     {

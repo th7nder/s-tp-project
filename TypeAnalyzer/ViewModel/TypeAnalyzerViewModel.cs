@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Windows.Input;
 using TypeAnalyzer.ViewModel.MVVM;
+using TypeAnalyzer.ViewModel.TreeItemViewModels;
 
 namespace TypeAnalyzer.ViewModel
 {

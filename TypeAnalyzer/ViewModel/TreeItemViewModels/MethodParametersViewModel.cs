@@ -2,7 +2,7 @@
 using System.Linq;
 using TypeAnalyzer.Model;
 
-namespace TypeAnalyzer.ViewModel
+namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 {
   class MethodParametersViewModel : TreeItemViewModel
   {

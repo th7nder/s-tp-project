@@ -1,17 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace TypeAnalyzer.Model
 {
+  [DataContract]
   public class TypeMetadata
   {
+    [DataMember]
     public string Name { get; }
+    [DataMember]
     public IEnumerable<PropertyMetadata> Properties { get; }
+    [DataMember]
     public IEnumerable<TypeMetadata> BaseTypes { get; }
+    [DataMember]
     public IEnumerable<MethodMetadata> Methods { get; }
+    [DataMember]
     public IEnumerable<AttributeMetadata> Attributes { get; }
+    [DataMember]
     public IEnumerable<TypeMetadata> TypeParameters { get; }
+    [DataMember]
     public IEnumerable<TypeMetadata> TypeArguments { get; }
     private TypeMetadata(TypeInfo typeInfo)
     {

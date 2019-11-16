@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +48,7 @@
     <Compile Include="MethodParameterMetadata.cs" />
     <Compile Include="NamespaceMetadata.cs" />
     <Compile Include="PropertyMetadata.cs" />
+    <Compile Include="Serialization\XmlSerialization.cs" />
     <Compile Include="TypeMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

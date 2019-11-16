@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TypeAnalyzer"
-        xmlns:viewmodel="clr-namespace:TypeAnalyzer.ViewModel"
+        xmlns:viewModel="clr-namespace:TypeAnalyzer.ViewModel"
+        xmlns:treeViewModels="clr-namespace:TypeAnalyzer.ViewModel.TreeItemViewModels"
         mc:Ignorable="d"
         Title="Type Analyzer" Height="300" Width="400">
     <Window.DataContext>
-        <viewmodel:TypeAnalyzerViewModel/>
+        <viewModel:TypeAnalyzerViewModel/>
     </Window.DataContext>
     <DockPanel> 
         <Menu DockPanel.Dock="Top">
@@ -29,10 +30,10 @@
             <TextBlock Grid.Row="0" Text="{Binding PathVariable}"/>
             <TreeView Grid.Row="1" Name="TreeView" ItemsSource="{Binding AssemblyModel}">
                 <TreeView.Resources>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type viewmodel:TreeItemViewModel}">
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type viewModel:TreeItemViewModel}">
                         <TextBlock Text="{Binding Path=Name}"/>
                     </HierarchicalDataTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type viewmodel:DetailViewModel}">
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type treeViewModels:DetailViewModel}">
                       <StackPanel Orientation="Horizontal">
                         <TextBlock FontWeight="Bold" Text="{Binding Name}" />
                         <TextBlock Text="{Binding Value}" />

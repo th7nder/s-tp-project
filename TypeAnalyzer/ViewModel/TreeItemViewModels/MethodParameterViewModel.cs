@@ -1,6 +1,6 @@
 ﻿using TypeAnalyzer.Model;
 
-namespace TypeAnalyzer.ViewModel
+namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 {
   class MethodParameterViewModel : TreeItemViewModel
   {

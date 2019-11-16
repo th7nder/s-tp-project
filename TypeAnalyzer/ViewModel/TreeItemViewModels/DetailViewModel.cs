@@ -1,4 +1,4 @@
-﻿namespace TypeAnalyzer.ViewModel
+﻿namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 {
   public class DetailViewModel : TreeItemViewModel
   {
