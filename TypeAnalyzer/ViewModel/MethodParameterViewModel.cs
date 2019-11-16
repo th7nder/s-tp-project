@@ -14,6 +14,7 @@ namespace TypeAnalyzer.ViewModel
 
     protected override void BuildMyself()
     {
+      Children.Add(new TextDetailViewModel("Name: ", _parameterMetadata.Name));
       Children.Add(new TypeViewModel(_parameterMetadata.Type));
     }
   }

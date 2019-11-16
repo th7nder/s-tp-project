@@ -32,6 +32,12 @@
                     <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type viewmodel:TreeItemViewModel}">
                         <TextBlock Text="{Binding Path=Name}"/>
                     </HierarchicalDataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodel:TextDetailViewModel}">
+                      <StackPanel Orientation="Horizontal">
+                        <TextBlock FontWeight="Bold" Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Value}" />
+                      </StackPanel>
+                    </DataTemplate>
                 </TreeView.Resources>
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="TreeViewItem">
