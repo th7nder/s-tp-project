@@ -43,7 +43,7 @@ namespace TypeAnalyzer.Examples
 
     private sealed class NestedPrivate
     {
-      private void PrivateMethod()
+      private void PrivateMethod<T>(T a, T b)
       {
         
       }

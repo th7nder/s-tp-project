@@ -1,9 +1,11 @@
-﻿namespace TypeAnalyzer.ViewModel.TreeItemViewModels
+﻿using System.Collections.Generic;
+
+namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 {
   public class DetailViewModel : TreeItemViewModel
   {
     public string Value { get; }
-    public TreeItemViewModel ChildrenItem { get; }
+    public List<TreeItemViewModel> ChildrenItems { get; } = new List<TreeItemViewModel>();
 
     // There are two constructors, because when you don't have any items in collection arrow is not shown.
     public DetailViewModel(string name, string value)
@@ -17,14 +19,21 @@
     {
       Name = name;
       Value = value;
-      ChildrenItem = childrenItem;
+      ChildrenItems.Add(childrenItem);
+    }
+    
+    public DetailViewModel(string name, string value, List<TreeItemViewModel> childrenItems)
+    {
+      Name = name;
+      Value = value;
+      ChildrenItems = childrenItems;
     }
 
     protected override void BuildMyself()
     {
-      if (ChildrenItem != null)
+      foreach (TreeItemViewModel item in ChildrenItems)
       {
-        Children.Add(ChildrenItem);
+        Children.Add(item);
       }
     }
   }

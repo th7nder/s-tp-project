@@ -17,6 +17,8 @@ namespace TypeAnalyzer.Model
     public IEnumerable<MethodParameterMetadata> Parameters { get; }
     [DataMember]
     public IEnumerable<AttributeMetadata> Attributes { get; }
+    [DataMember]
+    public IEnumerable<TypeMetadata> GenericArguments { get; }
     [DataMember] 
     public AccessModifier AccessModifier { get; set; }
 
@@ -29,6 +31,8 @@ namespace TypeAnalyzer.Model
       Attributes = from attribute in method.CustomAttributes
                    select AttributeMetadata.Analyze(attribute);
       AccessModifier = method.GetAccessModifier();
+      GenericArguments = from generic in method.GetGenericArguments()
+                         select TypeMetadata.Analyze(generic.GetTypeInfo());
     }
   }
 }

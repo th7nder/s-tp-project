@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using TypeAnalyzer.Model;
 
 namespace TypeAnalyzer.ViewModel.TreeItemViewModels
@@ -23,7 +23,10 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
         parameterSignatures.Add($"{parameter.Type.Name} {parameter.Name}");
       }
 
-      return $"{_methodMetadata.Name}({String.Join(", ", parameterSignatures.ToArray())}):{_methodMetadata.ReturnType.Name}";
+      List<string> genericsNames = (from genericArgument in _methodMetadata.GenericArguments
+                                    select genericArgument.Name).ToList();
+      
+      return $"{_methodMetadata.Name}{(genericsNames.Any() ? "<" + String.Join(", ", genericsNames) + ">" : "")}({String.Join(", ", parameterSignatures.ToArray())}):{_methodMetadata.ReturnType.Name}";
     }
 
     protected override void BuildMyself()
@@ -31,6 +34,15 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       Children.Add(new DetailViewModel("Name: ", _methodMetadata.Name));
       Children.Add(new DetailViewModel("Access Level: ", _methodMetadata.AccessModifier.ToString()));
       Children.Add(new DetailViewModel("Return type: ", _methodMetadata.ReturnType.Name, new TypeViewModel(_methodMetadata.ReturnType)));
+
+      IEnumerable<TreeItemViewModel> genericModels = from genericArgument in _methodMetadata.GenericArguments
+                                                     select new TypeViewModel(genericArgument);
+
+      if (genericModels.Any())
+      {
+        Children.Add(new DetailViewModel("Generic parameters", "", genericModels.ToList()));
+      }
+
       Children.Add(new MethodParametersViewModel(_methodMetadata.Parameters));
       Children.Add(new AttributesViewModel(_methodMetadata.Attributes));  
     }
