@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TypeAnalyzer.Examples
 {
@@ -6,10 +7,22 @@ namespace TypeAnalyzer.Examples
   {
 
   }
+
+  public class GenericType<T, U>
+  {
+    T test { get; set; }
+  }
+
+  public class ClosedOpenType<R> : GenericType<int, string>
+  {
+
+  }
+
   public class BaseClass
   {
     [Test]
     public Class1 Class { get; set; }
+    public IEnumerable<string> Enumerable { get; set; }
   }
 
   public interface ISomething

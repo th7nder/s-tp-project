@@ -1,4 +1,6 @@
-﻿using TypeAnalyzer.Model;
+﻿using System.Collections.Generic;
+using System.Linq;
+using TypeAnalyzer.Model;
 
 namespace TypeAnalyzer.ViewModel
 {
@@ -8,8 +10,8 @@ namespace TypeAnalyzer.ViewModel
 
     public TypeViewModel(TypeMetadata typeMetadata)
     {
-      Name = typeMetadata.Name;
       _typeMetadata = typeMetadata;
+      Name = typeMetadata.Name;
     }
 
     protected override void BuildMyself()
