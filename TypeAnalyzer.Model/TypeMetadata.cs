@@ -26,6 +26,9 @@ namespace TypeAnalyzer.Model
     public IEnumerable<TypeMetadata> TypeArguments { get; }
     [DataMember] 
     public AccessModifier AccessModifier { get; set; }
+    [DataMember]
+    public bool IsSealed { get; set; }
+    
     private TypeMetadata(TypeInfo typeInfo, bool isPlaceholder)
     {
       types[GetIdentifier(typeInfo)] = this;
@@ -45,6 +48,7 @@ namespace TypeAnalyzer.Model
         
         Attributes = from attribute in typeInfo.CustomAttributes
                      select AttributeMetadata.Analyze(attribute);
+        IsSealed = typeInfo.IsSealed;
       }
 
       TypeParameters = from typeParameter in typeInfo.GenericTypeParameters

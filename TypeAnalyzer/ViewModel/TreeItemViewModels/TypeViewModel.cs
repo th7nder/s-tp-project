@@ -27,6 +27,7 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       }
 
       Children.Add(new DetailViewModel("Access Level: ", _typeMetadata.AccessModifier.ToString()));
+      Children.Add(new DetailViewModel("Is Sealed: ", _typeMetadata.IsSealed.ToString()));
       
       Children.Add(new BaseTypesViewModel(_typeMetadata.BaseTypes));
       Children.Add(new AttributesViewModel(_typeMetadata.Attributes));
