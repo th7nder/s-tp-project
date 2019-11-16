@@ -5,14 +5,14 @@ using System.Runtime.Serialization;
 
 namespace TypeAnalyzer.Model
 {
-  
+
   [DataContract]
   public class MethodMetadata
   {
     [DataMember]
-    public string Name { get; }
+    public string Name { get; private set; }
     [DataMember]
-    public TypeMetadata ReturnType { get; }
+    public TypeMetadata ReturnType { get; private set; }
     [DataMember]
     public IEnumerable<MethodParameterMetadata> Parameters { get; }
     [DataMember]
@@ -25,7 +25,7 @@ namespace TypeAnalyzer.Model
       Parameters = from parameter in method.GetParameters()
                    select new MethodParameterMetadata(parameter);
       Attributes = from attribute in method.CustomAttributes
-                   select new AttributeMetadata(attribute);
+                   select AttributeMetadata.Analyze(attribute);
     }
   }
 }

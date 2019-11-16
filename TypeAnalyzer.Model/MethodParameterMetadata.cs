@@ -7,9 +7,9 @@ namespace TypeAnalyzer.Model
   public class MethodParameterMetadata
   {
     [DataMember]
-    public string Name { get; }
+    public string Name { get; private set; }
     [DataMember]
-    public TypeMetadata Type { get; }
+    public TypeMetadata Type { get; private set; }
 
     public MethodParameterMetadata(ParameterInfo parameter)
     {

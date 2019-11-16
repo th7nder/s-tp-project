@@ -7,7 +7,7 @@
         xmlns:viewModel="clr-namespace:TypeAnalyzer.ViewModel"
         xmlns:treeViewModels="clr-namespace:TypeAnalyzer.ViewModel.TreeItemViewModels"
         mc:Ignorable="d"
-        Title="Type Analyzer" Height="300" Width="400">
+        Title="Type Analyzer" Height="400" Width="500">
     <Window.DataContext>
         <viewModel:TypeAnalyzerViewModel/>
     </Window.DataContext>
@@ -15,6 +15,7 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
                 <MenuItem Header="_Open" Command="{Binding BrowseCommand}"/>
+                <MenuItem Header="_Save XML" Command="{Binding SaveXMLCommand}"/>
                 <Separator/>
                 <MenuItem Header="_Exit"/>
             </MenuItem>
@@ -25,10 +26,12 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{Binding PathVariable}"/>
-            <TreeView Grid.Row="1" Name="TreeView" ItemsSource="{Binding AssemblyModel}">
+            <TextBlock Grid.Row="0" Text="{Binding PathVariable}" Padding="5"/>
+            <TextBlock Grid.Row="1" Text="{Binding XMLSavePath}" Padding="5"/>
+            <TreeView Grid.Row="2" Name="TreeView" ItemsSource="{Binding AssemblyModel}">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type viewModel:TreeItemViewModel}">
                         <TextBlock Text="{Binding Path=Name}"/>

@@ -10,9 +10,9 @@ namespace TypeAnalyzer.Model
   {
 
     [DataMember]
-    public string Name { get; }
+    public string Name { get; private set; }
     [DataMember]
-    public TypeMetadata TypeMetadata { get;  }
+    public TypeMetadata TypeMetadata { get; private set; }
     [DataMember]
     public IEnumerable<MethodMetadata> Accessors { get; }
     [DataMember]
@@ -24,7 +24,7 @@ namespace TypeAnalyzer.Model
       Accessors = from methodInfo in property.GetAccessors()
                   select new MethodMetadata(methodInfo);
       Attributes = from customAttributeData in property.CustomAttributes
-                   select new AttributeMetadata(customAttributeData);
+                   select AttributeMetadata.Analyze(customAttributeData);
     }
   }
 }

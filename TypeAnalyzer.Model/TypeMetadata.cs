@@ -5,11 +5,11 @@ using System.Runtime.Serialization;
 
 namespace TypeAnalyzer.Model
 {
-  [DataContract]
+  [DataContract(IsReference = true)]
   public class TypeMetadata
   {
     [DataMember]
-    public string Name { get; }
+    public string Name { get; private set;  }
     [DataMember]
     public IEnumerable<PropertyMetadata> Properties { get; }
     [DataMember]
@@ -31,12 +31,12 @@ namespace TypeAnalyzer.Model
       BaseTypes = Enumerable.Repeat(typeInfo.BaseType, 1)
                 .Concat(typeInfo.GetType().GetInterfaces())
                 .Where(type => type != null)
-                .Select(type => new TypeMetadata(type.GetTypeInfo()));
+                .Select(type => Analyze(type.GetTypeInfo()));
 
       Methods = from method in typeInfo.DeclaredMethods
                 select new MethodMetadata(method);
       Attributes = from attribute in typeInfo.CustomAttributes
-                   select new AttributeMetadata(attribute);
+                   select AttributeMetadata.Analyze(attribute);
 
       TypeParameters = from typeParameter in typeInfo.GenericTypeParameters
                        select Analyze(typeParameter.GetTypeInfo());
@@ -65,6 +65,7 @@ namespace TypeAnalyzer.Model
       {
         identifier = typeInfo.Name;
       }
+
       return identifier;
     }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace TypeAnalyzer.Model.Serialization
 {
@@ -17,10 +18,17 @@ namespace TypeAnalyzer.Model.Serialization
       if (dataObject == null)
         throw new ArgumentNullException("Object cannot be null");
 
-      DataContractSerializer dataContractSerializer = new DataContractSerializer(typeof(Type));
-      using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
+      DataContractSerializer dataContractSerializer = new DataContractSerializer(typeof(Type), null, 655360, true, true, null);
+      XmlWriterSettings xmlWriterSettings = new XmlWriterSettings()
       {
-        dataContractSerializer.WriteObject(fileStream, dataObject);
+        Indent = true,
+        IndentChars = "  ",
+        NewLineChars = "\r\n"
+      };
+      using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
+      using (XmlWriter xmlWriter = XmlWriter.Create(fileStream, xmlWriterSettings))
+      {
+        dataContractSerializer.WriteObject(xmlWriter, dataObject);
       }
     }
 

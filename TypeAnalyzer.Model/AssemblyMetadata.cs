@@ -11,7 +11,7 @@ namespace TypeAnalyzer.Model
     [DataMember]
     public IEnumerable<NamespaceMetadata> Namespaces { get; }
     [DataMember]
-    public string Name { get; }
+    public string Name { get; private set;  }
     public AssemblyMetadata(Assembly assembly)
     {
       Name = assembly.GetName().FullName;
