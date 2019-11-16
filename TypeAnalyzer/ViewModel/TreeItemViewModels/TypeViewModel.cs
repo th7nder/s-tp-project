@@ -31,6 +31,7 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       Children.Add(new GenericParametersViewModel(_typeMetadata.GenericArguments));
       Children.Add(new AttributesViewModel(_typeMetadata.Attributes));
       Children.Add(new PropertiesViewModel(_typeMetadata.Properties));
+      Children.Add(new FieldsViewModel(_typeMetadata.Fields));
       Children.Add(new MethodsViewModel(_typeMetadata.Methods));
     }
   }

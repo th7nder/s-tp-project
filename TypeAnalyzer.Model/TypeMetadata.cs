@@ -15,6 +15,8 @@ namespace TypeAnalyzer.Model
     [DataMember]
     public IEnumerable<PropertyMetadata> Properties { get; }
     [DataMember]
+    public IEnumerable<FieldMetadata> Fields { get; }
+    [DataMember]
     public IEnumerable<TypeMetadata> BaseTypes { get; }
     [DataMember]
     public IEnumerable<MethodMetadata> Methods { get; }
@@ -39,6 +41,9 @@ namespace TypeAnalyzer.Model
       {
         Properties = from property in typeInfo.DeclaredProperties
                      select new PropertyMetadata(property);
+
+        Fields = from field in typeInfo.DeclaredFields
+                 select new FieldMetadata(field);
 
         BaseTypes = Enumerable.Repeat(typeInfo.BaseType, 1)
                   .Concat(typeInfo.GetType().GetInterfaces())

@@ -45,6 +45,7 @@
     <Compile Include="AccessModifier.cs" />
     <Compile Include="AssemblyMetadata.cs" />
     <Compile Include="AttributeMetadata.cs" />
+    <Compile Include="FieldMetadata.cs" />
     <Compile Include="MethodMetadata.cs" />
     <Compile Include="MethodParameterMetadata.cs" />
     <Compile Include="NamespaceMetadata.cs" />

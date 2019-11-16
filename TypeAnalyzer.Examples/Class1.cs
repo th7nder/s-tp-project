@@ -36,9 +36,15 @@ namespace TypeAnalyzer.Examples
   {
     
     public Class1 Class { get; set; }
+    public Animals animalField;
     public string Concat(string a, string b)
     {
       return a + b;
+    }
+    
+    public enum Animals
+    {
+      DOG, CAT
     }
 
     private sealed class NestedPrivate<K>

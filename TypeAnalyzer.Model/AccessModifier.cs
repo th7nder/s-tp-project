@@ -36,6 +36,22 @@ namespace TypeAnalyzer.Model
             return AccessModifier.None;
         }
 
+        public static AccessModifier GetAccessModifier(this FieldInfo fieldInfo)
+        {
+            if (fieldInfo.IsPrivate)
+                return AccessModifier.Private;
+            if (fieldInfo.IsFamily)
+                return AccessModifier.Protected;
+            if (fieldInfo.IsFamilyOrAssembly)
+                return AccessModifier.ProtectedInternal;
+            if (fieldInfo.IsAssembly)
+                return AccessModifier.Internal;
+            if (fieldInfo.IsPublic)
+                return AccessModifier.Public;
+            
+            return AccessModifier.None;
+        }
+        
         public static AccessModifier GetAccessModifier(this PropertyInfo propertyInfo)
         {
             return GetAccessModifier(propertyInfo.GetMethod);
@@ -55,6 +71,7 @@ namespace TypeAnalyzer.Model
         Internal,
         [EnumMember]
         Public,
+        [EnumMember]
         None
     }
 }
