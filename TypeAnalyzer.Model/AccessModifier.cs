@@ -35,6 +35,11 @@ namespace TypeAnalyzer.Model
             
             return AccessModifier.None;
         }
+
+        public static AccessModifier GetAccessModifier(this PropertyInfo propertyInfo)
+        {
+            return GetAccessModifier(propertyInfo.GetMethod);
+        }
     }
 
     [DataContract]

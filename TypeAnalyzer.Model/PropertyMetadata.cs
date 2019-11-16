@@ -17,6 +17,8 @@ namespace TypeAnalyzer.Model
     public IEnumerable<MethodMetadata> Accessors { get; }
     [DataMember]
     public IEnumerable<AttributeMetadata> Attributes { get; }
+    [DataMember] 
+    public AccessModifier AccessModifier { get; set; }
     public PropertyMetadata(PropertyInfo property)
     {
       Name = property.Name;
@@ -25,6 +27,7 @@ namespace TypeAnalyzer.Model
                   select new MethodMetadata(methodInfo);
       Attributes = from customAttributeData in property.CustomAttributes
                    select AttributeMetadata.Analyze(customAttributeData);
+      AccessModifier = property.GetAccessModifier();
     }
   }
 }

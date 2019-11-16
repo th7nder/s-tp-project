@@ -15,6 +15,7 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
     protected override void BuildMyself()
     {
       Children.Add(new DetailViewModel("Name: ", _propertyMetadata.Name));
+      Children.Add(new DetailViewModel("Access Level: ", _propertyMetadata.AccessModifier.ToString()));
       Children.Add(new TypeViewModel(_propertyMetadata.TypeMetadata));
       Children.Add(new AttributesViewModel(_propertyMetadata.Attributes));
       Children.Add(new MethodsViewModel(_propertyMetadata.Accessors, "Accessors"));
