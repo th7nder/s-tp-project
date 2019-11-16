@@ -28,9 +28,9 @@ namespace TypeAnalyzer.ViewModel
 
     protected override void BuildMyself()
     {
-      Children.Add(new TextDetailViewModel("Name: ", _methodMetadata.Name));
+      Children.Add(new DetailViewModel("Name: ", _methodMetadata.Name));
+      Children.Add(new DetailViewModel("Return type: ", _methodMetadata.ReturnType.Name, new TypeViewModel(_methodMetadata.ReturnType)));
       Children.Add(new MethodParametersViewModel(_methodMetadata.Parameters));
-      Children.Add(new TypeViewModel(_methodMetadata.ReturnType));
     }
   }
 }

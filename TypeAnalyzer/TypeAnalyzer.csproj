@@ -65,7 +65,7 @@
     <Compile Include="ViewModel\NamespaceViewModel.cs" />
     <Compile Include="ViewModel\PropertiesViewModel.cs" />
     <Compile Include="ViewModel\PropertyViewModel.cs" />
-    <Compile Include="ViewModel\TextDetailViewModel.cs" />
+    <Compile Include="ViewModel\DetailViewModel.cs" />
     <Compile Include="ViewModel\TreeItemViewModel.cs" />
     <Compile Include="ViewModel\TypeAnalyzerViewModel.cs" />
     <Compile Include="ViewModel\MVVM\ViewModelBase.cs" />
