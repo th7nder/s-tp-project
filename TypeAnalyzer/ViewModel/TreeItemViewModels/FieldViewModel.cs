@@ -1,4 +1,5 @@
-﻿using TypeAnalyzer.Model;
+﻿using System.Linq;
+using TypeAnalyzer.Model;
 
 namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 {
@@ -17,7 +18,11 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
             Children.Add(new DetailViewModel("Name: ", _fieldMetadata.Name));
             Children.Add(new DetailViewModel("Access Level: ", _fieldMetadata.AccessModifier.ToString()));
             Children.Add(new TypeViewModel(_fieldMetadata.Type));
-            Children.Add(new AttributesViewModel(_fieldMetadata.Attributes));
+
+            if (_fieldMetadata.Attributes.Any())
+            {
+                Children.Add(new AttributesViewModel(_fieldMetadata.Attributes));
+            }
         }
 
         private string GetPropertySignature()
