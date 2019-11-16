@@ -9,12 +9,18 @@ namespace TypeAnalyzer.ViewModel
     public PropertyViewModel(PropertyMetadata propertyMetadata)
     {
       _propertyMetadata = propertyMetadata;
-      Name = propertyMetadata.Name;
+      Name = GetPropertySignature();
     }
 
     protected override void BuildMyself()
     {
+      Children.Add(new DetailViewModel("Name: ", _propertyMetadata.Name));
       Children.Add(new TypeViewModel(_propertyMetadata.TypeMetadata));
+    }
+
+    private string GetPropertySignature()
+    {
+      return $"{_propertyMetadata.Name}: {_propertyMetadata.TypeMetadata.Name}";
     }
   }
 }
