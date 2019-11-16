@@ -44,10 +44,10 @@ namespace TypeAnalyzer.Model
                      select AttributeMetadata.Analyze(attribute);
       }
 
-        TypeParameters = from typeParameter in typeInfo.GenericTypeParameters
-                         select Analyze(typeParameter.GetTypeInfo());
-        TypeArguments = from typeArgument in typeInfo.GenericTypeArguments
-                        select Analyze(typeArgument.GetTypeInfo());
+      TypeParameters = from typeParameter in typeInfo.GenericTypeParameters
+                       select Analyze(typeParameter.GetTypeInfo());
+      TypeArguments = from typeArgument in typeInfo.GenericTypeArguments
+                      select Analyze(typeArgument.GetTypeInfo());
 
       Name = GetTypeSignature(typeInfo.Name);
       IsPlaceholder = isPlaceholder;
@@ -80,11 +80,11 @@ namespace TypeAnalyzer.Model
     private string GetTypeSignature(string baseName)
     {
       IEnumerable<string> types = null;
-      if (TypeArguments.Count() > 0)
+      if (TypeArguments.Any())
       {
         types = TypeArguments.Select(type => type.Name);
       }
-      else if (TypeParameters.Count() > 0)
+      else if (TypeParameters.Any())
       {
         types = TypeParameters.Select(type => type.Name);
       }
