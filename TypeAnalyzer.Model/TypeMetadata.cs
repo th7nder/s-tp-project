@@ -10,6 +10,7 @@ namespace TypeAnalyzer.Model
     public IEnumerable<PropertyMetadata> Properties { get; }
     public IEnumerable<TypeMetadata> BaseTypes { get; }
     public IEnumerable<MethodMetadata> Methods { get; }
+    public IEnumerable<AttributeMetadata> Attributes { get; }
     private TypeMetadata(TypeInfo typeInfo)
     {
       types[typeInfo.FullName] = this;
@@ -24,6 +25,8 @@ namespace TypeAnalyzer.Model
 
       Methods = from method in typeInfo.DeclaredMethods
                 select new MethodMetadata(method);
+      Attributes = from attribute in typeInfo.CustomAttributes
+                   select new AttributeMetadata(attribute);
     }
 
     private static Dictionary<string, TypeMetadata> types = new Dictionary<string, TypeMetadata>();

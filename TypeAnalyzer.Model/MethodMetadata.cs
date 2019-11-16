@@ -9,6 +9,7 @@ namespace TypeAnalyzer.Model
     public string Name { get; }
     public TypeMetadata ReturnType { get; }
     public IEnumerable<MethodParameterMetadata> Parameters { get; }
+    public IEnumerable<AttributeMetadata> Attributes { get; }
 
     public MethodMetadata(MethodInfo method)
     {
@@ -16,6 +17,8 @@ namespace TypeAnalyzer.Model
       ReturnType = TypeMetadata.Analyze(method.ReturnType.GetTypeInfo());
       Parameters = from parameter in method.GetParameters()
                    select new MethodParameterMetadata(parameter);
+      Attributes = from attribute in method.CustomAttributes
+                   select new AttributeMetadata(attribute);
     }
   }
 }

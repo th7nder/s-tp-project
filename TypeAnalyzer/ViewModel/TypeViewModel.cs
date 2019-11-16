@@ -15,6 +15,7 @@ namespace TypeAnalyzer.ViewModel
     protected override void BuildMyself()
     {
       Children.Add(new BaseTypesViewModel(_typeMetadata.BaseTypes));
+      Children.Add(new AttributesViewModel(_typeMetadata.Attributes));
       Children.Add(new PropertiesViewModel(_typeMetadata.Properties));
       Children.Add(new MethodsViewModel(_typeMetadata.Methods));
     }

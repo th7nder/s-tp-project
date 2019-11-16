@@ -8,9 +8,9 @@ namespace TypeAnalyzer.ViewModel
   {
     private readonly IEnumerable<MethodMetadata> _methods;
 
-    public MethodsViewModel(IEnumerable<MethodMetadata> methods)
+    public MethodsViewModel(IEnumerable<MethodMetadata> methods, string name = "Methods")
     {
-      Name = "Methods";
+      Name = name;
       _methods = methods;
     }
 

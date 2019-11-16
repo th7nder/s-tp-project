@@ -31,6 +31,7 @@ namespace TypeAnalyzer.ViewModel
       Children.Add(new DetailViewModel("Name: ", _methodMetadata.Name));
       Children.Add(new DetailViewModel("Return type: ", _methodMetadata.ReturnType.Name, new TypeViewModel(_methodMetadata.ReturnType)));
       Children.Add(new MethodParametersViewModel(_methodMetadata.Parameters));
+      Children.Add(new AttributesViewModel(_methodMetadata.Attributes));  
     }
   }
 }

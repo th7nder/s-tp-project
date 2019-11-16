@@ -2,22 +2,30 @@
 
 namespace TypeAnalyzer.Examples
 {
-    public class BaseClass
-    {
-        public Class1 Class { get; set; }
-    }
+  public class TestAttribute : Attribute
+  {
 
-    public interface ISomething
-    {
-        String Concat(String a, String b);
-    }
+  }
+  public class BaseClass
+  {
+    [Test]
+    public Class1 Class { get; set; }
+  }
 
-    public class Class1 : BaseClass, ISomething
+  public interface ISomething
+  {
+    [Test]
+    String Concat(String a, String b);
+  }
+
+  [Test]
+  public class Class1 : BaseClass, ISomething
+  {
+    
+    public Class1 Class { get; set; }
+    public string Concat(string a, string b)
     {
-      public Class1 Class { get; set; }
-      public string Concat(string a, string b)
-      {
-         return a + b;
-      }
+      return a + b;
     }
+  }
 }

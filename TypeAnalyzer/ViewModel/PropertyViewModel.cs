@@ -16,6 +16,8 @@ namespace TypeAnalyzer.ViewModel
     {
       Children.Add(new DetailViewModel("Name: ", _propertyMetadata.Name));
       Children.Add(new TypeViewModel(_propertyMetadata.TypeMetadata));
+      Children.Add(new AttributesViewModel(_propertyMetadata.Attributes));
+      Children.Add(new MethodsViewModel(_propertyMetadata.Accessors, "Accessors"));
     }
 
     private string GetPropertySignature()
