@@ -24,6 +24,8 @@ namespace TypeAnalyzer.Model
     public IEnumerable<TypeMetadata> TypeParameters { get; }
     [DataMember]
     public IEnumerable<TypeMetadata> TypeArguments { get; }
+    [DataMember]
+    public AccessModifier AccessModifier { get; }
     private TypeMetadata(TypeInfo typeInfo, bool isPlaceholder)
     {
       types[GetIdentifier(typeInfo)] = this;
@@ -40,8 +42,11 @@ namespace TypeAnalyzer.Model
 
         Methods = from method in typeInfo.DeclaredMethods
                   select new MethodMetadata(method);
+        
         Attributes = from attribute in typeInfo.CustomAttributes
                      select AttributeMetadata.Analyze(attribute);
+
+        AccessModifier = typeInfo.GetAccessModifier();
       }
 
       TypeParameters = from typeParameter in typeInfo.GenericTypeParameters

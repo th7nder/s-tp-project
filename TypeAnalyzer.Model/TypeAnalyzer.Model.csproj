@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessModifier.cs" />
     <Compile Include="AssemblyMetadata.cs" />
     <Compile Include="AttributeMetadata.cs" />
     <Compile Include="MethodMetadata.cs" />

@@ -40,5 +40,10 @@ namespace TypeAnalyzer.Examples
     {
       return a + b;
     }
+
+    private class NestedPrivate
+    {
+      
+    }
   }
 }

@@ -26,6 +26,8 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
         return;
       }
 
+      Children.Add(new DetailViewModel("Access Level: ", _typeMetadata.AccessModifier.ToString()));
+      
       Children.Add(new BaseTypesViewModel(_typeMetadata.BaseTypes));
       Children.Add(new AttributesViewModel(_typeMetadata.Attributes));
       Children.Add(new PropertiesViewModel(_typeMetadata.Properties));
