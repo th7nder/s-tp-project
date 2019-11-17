@@ -47,7 +47,7 @@ namespace TypeAnalyzer.Model
                  select new FieldMetadata(field);
 
         BaseTypes = Enumerable.Repeat(typeInfo.BaseType, 1)
-                  .Concat(typeInfo.GetType().GetInterfaces())
+                  .Concat(typeInfo.ImplementedInterfaces)
                   .Where(type => type != null)
                   .Select(type => Analyze(type.GetTypeInfo()));
 
