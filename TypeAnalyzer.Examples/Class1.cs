@@ -53,6 +53,8 @@ namespace TypeAnalyzer.Examples
     
     public Class1 Class { get; set; }
     public Animals AnimalField;
+    [Test]
+    public event EventHandler SomeEvent;
 
     private Class1(Animals animalField)
     {

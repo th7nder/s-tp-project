@@ -66,6 +66,11 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
         Children.Add(new PropertiesViewModel(_typeMetadata.Properties));
       }
 
+      if (_typeMetadata.Events.Any())
+      {
+        Children.Add(new EventsViewModel(_typeMetadata.Events));
+      }
+
       if (_typeMetadata.Fields.Any())
       {
         Children.Add(new FieldsViewModel(_typeMetadata.Fields));
