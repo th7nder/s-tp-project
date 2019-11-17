@@ -20,7 +20,7 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       List<string> parameterSignatures = new List<string>();
       foreach (MethodParameterMetadata parameter in _methodMetadata.Parameters)
       {
-        parameterSignatures.Add($"{parameter.Type.Name} {parameter.Name}");
+        parameterSignatures.Add(parameter.GetSignature());
       }
 
       if (_methodMetadata.IsExtensionMethod)

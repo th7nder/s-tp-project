@@ -25,6 +25,10 @@ namespace TypeAnalyzer.Examples
     public IEnumerable<string> Enumerable { get; set; }
     public static void Static() { }
     public abstract void Abstract();
+    public void Test1(in bool first, out bool second, ref int third, int optional = 5)
+    {
+      second = true;
+    }
   }
 
   public interface ISomething

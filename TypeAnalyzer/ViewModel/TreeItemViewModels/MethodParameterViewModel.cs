@@ -15,6 +15,7 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
     protected override void BuildMyself()
     {
       Children.Add(new DetailViewModel("Name: ", _parameterMetadata.Name));
+      Children.Add(new DetailViewModel("Kind: ", _parameterMetadata.Kind.ToString()));
       Children.Add(new DetailViewModel("Type: ", _parameterMetadata.Type.Name, new TypeViewModel(_parameterMetadata.Type)));
     }
   }
