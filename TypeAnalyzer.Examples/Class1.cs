@@ -18,7 +18,7 @@ namespace TypeAnalyzer.Examples
 
   }
 
-  public abstract class BaseClass
+  internal abstract class BaseClass
   {
     [Test]
     public Class1 Class { get; set; }
@@ -38,7 +38,7 @@ namespace TypeAnalyzer.Examples
   }
 
 
-  public static class ExtensionClass
+  internal static class ExtensionClass
   {
     public static int[, ,] array = new int[1,2,3];
     public static void ExtensionMethod(this Class1 obj)
@@ -48,7 +48,7 @@ namespace TypeAnalyzer.Examples
   }
 
   [Test]
-  public class Class1 : BaseClass, ISomething
+  internal class Class1 : BaseClass, ISomething
   {
     
     public Class1 Class { get; set; }

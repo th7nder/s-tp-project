@@ -19,6 +19,39 @@ namespace TypeAnalyzer.UnitTests
       Assert.AreEqual(assemblyMetadata.Namespaces.Count(), 1);
     }
 
+    [TestMethod]
+    public void AssemblyMetadata_ParsesNamespace()
+    {
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+
+      Assert.IsTrue(namespaceMetadata.Types.Count() > 5);
+    }
+
+    [TestMethod]
+    public void AssemblyMetadata_ParsesType()
+    {
+      TypeMetadata typeMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single().Types.Single(type => type.Name == "Class1");
+
+      Assert.IsNotNull(typeMetadata);
+    }
+
+    [TestMethod]
+    public void AssemblyMetadata_ParsesTypePropertyRecursively()
+    {
+      TypeMetadata typeMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single().Types.Single(type => type.Name == "Class1");
+
+      PropertyMetadata propertyMetadata = typeMetadata.Properties.Single(prop => prop.Name == "Class");
+
+      Assert.IsNotNull(propertyMetadata);
+      Assert.AreSame(typeMetadata, propertyMetadata.TypeMetadata);
+    }
+
+    [TestMethod]
+    public void AssemblyMetadata_DoesNotDuplicateAttributeMetadata()
+    {
+      Assert.Fail("not implemented");
+    }
+
 
     private class TestReflector : Reflector
     {
