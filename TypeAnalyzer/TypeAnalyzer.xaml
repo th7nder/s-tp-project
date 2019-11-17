@@ -36,6 +36,36 @@
                     <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type viewModel:TreeItemViewModel}">
                         <TextBlock Text="{Binding Path=Name}"/>
                     </HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type treeViewModels:PropertyViewModel}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Name="img" Width="16" Height="16" Stretch="Fill" Margin="0,0,5,0" Source="Resources/property.gif"/>
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type treeViewModels:MethodViewModel}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Name="img" Width="16" Height="16" Stretch="Fill" Margin="0,0,5,0" Source="Resources/method.gif"/>
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type treeViewModels:FieldViewModel}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Name="img" Width="16" Height="16" Stretch="Fill" Margin="0,0,5,0" Source="Resources/field.gif"/>
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type treeViewModels:NamespaceViewModel}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Name="img" Width="16" Height="16" Stretch="Fill" Margin="0,0,5,0" Source="Resources/namespace.gif"/>
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type treeViewModels:TypeViewModel}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Name="img" Width="16" Height="16" Stretch="Fill" Margin="0,0,5,0" Source="Resources/class.gif"/>
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type treeViewModels:DetailViewModel}">
                       <StackPanel Orientation="Horizontal">
                         <TextBlock FontWeight="Bold" Text="{Binding Name}" />

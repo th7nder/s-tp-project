@@ -121,6 +121,16 @@
       <Name>TypeAnalyzer.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\class.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\namespace.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\field.gif" />
+    <Resource Include="Resources\method.gif" />
+    <Resource Include="Resources\property.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
