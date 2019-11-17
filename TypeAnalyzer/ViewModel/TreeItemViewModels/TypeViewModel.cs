@@ -23,8 +23,9 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       if (_typeMetadata.IsPlaceholder)
       {
         return;
-      }
+      } 
 
+      Children.Add(new DetailViewModel("Type Kind: ", _typeMetadata.TypeKind.ToString()));
       Children.Add(new DetailViewModel("Access Level: ", _typeMetadata.AccessModifier.ToString()));
       Children.Add(new DetailViewModel("Is Sealed: ", _typeMetadata.IsSealed.ToString()));
       

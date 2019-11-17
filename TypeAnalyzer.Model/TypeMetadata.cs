@@ -33,6 +33,8 @@ namespace TypeAnalyzer.Model
     public AccessModifier AccessModifier { get; set; }
     [DataMember]
     public bool IsSealed { get; set; }
+    [DataMember]
+    public TypeKind TypeKind { get; private set; }
     
     private TypeMetadata(TypeInfo typeInfo, bool isPlaceholder)
     {
@@ -57,6 +59,7 @@ namespace TypeAnalyzer.Model
         Attributes = from attribute in typeInfo.CustomAttributes
                      select AttributeMetadata.Analyze(attribute);
         IsSealed = typeInfo.IsSealed;
+        TypeKind = typeInfo.GetTypeKind();
       }
 
       TypeParameters = from typeParameter in typeInfo.GenericTypeParameters
