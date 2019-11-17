@@ -21,6 +21,8 @@ namespace TypeAnalyzer.Model
     public IEnumerable<TypeMetadata> GenericArguments { get; private set; }
     [DataMember] 
     public AccessModifier AccessModifier { get; set; }
+    [DataMember]
+    public MethodModifier MethodModifier { get; private set; }
 
     public MethodMetadata(MethodInfo method)
     {
@@ -31,6 +33,7 @@ namespace TypeAnalyzer.Model
       Attributes = from attribute in method.CustomAttributes
                    select AttributeMetadata.Analyze(attribute);
       AccessModifier = method.GetAccessModifier();
+      MethodModifier = method.GetMethodModifier();
       GenericArguments = from generic in method.GetGenericArguments()
                          select TypeMetadata.Analyze(generic.GetTypeInfo());
     }

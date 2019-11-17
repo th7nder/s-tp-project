@@ -25,8 +25,9 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 
       List<string> genericsNames = (from genericArgument in _methodMetadata.GenericArguments
                                     select genericArgument.Name).ToList();
-      
-      return $"{_methodMetadata.Name}{(genericsNames.Any() ? "<" + String.Join(", ", genericsNames) + ">" : "")}({String.Join(", ", parameterSignatures.ToArray())}):{_methodMetadata.ReturnType.Name}";
+
+      string methodModifier = _methodMetadata.MethodModifier != MethodModifier.None ? _methodMetadata.MethodModifier.ToString().ToLower() + " " : "";
+      return $"{methodModifier}{_methodMetadata.Name}{(genericsNames.Any() ? "<" + String.Join(", ", genericsNames) + ">" : "")}({String.Join(", ", parameterSignatures.ToArray())}):{_methodMetadata.ReturnType.Name}";
     }
 
     protected override void BuildMyself()

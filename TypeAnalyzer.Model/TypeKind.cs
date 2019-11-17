@@ -12,7 +12,6 @@ namespace TypeAnalyzer.Model
   {
     public static TypeKind GetTypeKind(this TypeInfo typeInfo)
     {
-      TypeKind typeKind = TypeKind.None;
       if (typeInfo.IsInterface)
         return TypeKind.Interface;
       if (typeInfo.IsAbstract)
@@ -24,7 +23,7 @@ namespace TypeAnalyzer.Model
       if (typeInfo.IsEnum)
         return TypeKind.Enum;
 
-      return typeKind;
+      return TypeKind.None;
     }
   }
 

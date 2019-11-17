@@ -18,11 +18,13 @@ namespace TypeAnalyzer.Examples
 
   }
 
-  public class BaseClass
+  public abstract class BaseClass
   {
     [Test]
     public Class1 Class { get; set; }
     public IEnumerable<string> Enumerable { get; set; }
+    public static void Static() { }
+    public abstract void Abstract();
   }
 
   public interface ISomething
@@ -41,7 +43,11 @@ namespace TypeAnalyzer.Examples
     {
       return a + b;
     }
-    
+
+    public override void Abstract()
+    { 
+    }
+
     public enum Animals
     {
       DOG, CAT
