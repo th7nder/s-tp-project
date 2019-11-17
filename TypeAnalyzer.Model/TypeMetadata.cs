@@ -44,6 +44,8 @@ namespace TypeAnalyzer.Model
     public TypeKind TypeKind { get; private set; }
     [DataMember]
     public IEnumerable<MethodMetadata> ExtensionMethods { get; private set; } = new List<MethodMetadata>();
+    [DataMember]
+    public TypeMetadata DeclaringType { get; set; }
     
     private TypeMetadata(TypeInfo typeInfo, bool isPlaceholder)
     {
@@ -73,7 +75,8 @@ namespace TypeAnalyzer.Model
         
         Attributes = from attribute in typeInfo.CustomAttributes
                      select AttributeMetadata.Analyze(attribute);
-        
+
+        DeclaringType = typeInfo.DeclaringType != null ? Analyze(typeInfo.DeclaringType.GetTypeInfo()) : null;
         IsSealed = typeInfo.IsSealed;
         IsPointer = typeInfo.IsPointer;
         TypeKind = typeInfo.GetTypeKind();
