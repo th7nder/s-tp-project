@@ -73,6 +73,7 @@
     <Compile Include="ViewModel\TreeItemViewModels\PropertyViewModel.cs" />
     <Compile Include="ViewModel\TreeItemViewModels\DetailViewModel.cs" />
     <Compile Include="ViewModel\TreeItemViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\TypesViewModel.cs" />
     <Compile Include="ViewModel\TypeAnalyzerViewModel.cs" />
     <Compile Include="ViewModel\MVVM\ViewModelBase.cs" />
     <Compile Include="ViewModel\TreeItemViewModels\TypeViewModel.cs" />
