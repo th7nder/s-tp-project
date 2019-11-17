@@ -33,6 +33,15 @@ namespace TypeAnalyzer.Examples
     String Concat(String a, String b);
   }
 
+
+  public static class ExtensionClass
+  {
+    public static void ExtensionMethod(this Class1 obj)
+    {
+
+    } 
+  }
+
   [Test]
   public class Class1 : BaseClass, ISomething
   {

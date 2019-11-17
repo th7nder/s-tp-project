@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 
 namespace TypeAnalyzer.Model
@@ -23,10 +24,13 @@ namespace TypeAnalyzer.Model
     public AccessModifier AccessModifier { get; set; }
     [DataMember]
     public MethodModifier MethodModifier { get; private set; }
+    [DataMember]
+    public bool IsExtensionMethod { get; private set; }
 
     public MethodMetadata(MethodInfo method)
     {
       Name = method.Name;
+      IsExtensionMethod = method.IsDefined(typeof(ExtensionAttribute), false);
       ReturnType = TypeMetadata.Analyze(method.ReturnType.GetTypeInfo());
       Parameters = from parameter in method.GetParameters()
                    select new MethodParameterMetadata(parameter);

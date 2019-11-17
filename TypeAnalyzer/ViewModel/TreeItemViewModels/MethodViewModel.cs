@@ -23,6 +23,12 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
         parameterSignatures.Add($"{parameter.Type.Name} {parameter.Name}");
       }
 
+      if (_methodMetadata.IsExtensionMethod)
+      {
+        parameterSignatures[0] = $"this {parameterSignatures[0]}";
+      }
+
+
       List<string> genericsNames = (from genericArgument in _methodMetadata.GenericArguments
                                     select genericArgument.Name).ToList();
 

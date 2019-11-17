@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 
 namespace TypeAnalyzer.Model
@@ -35,6 +36,8 @@ namespace TypeAnalyzer.Model
     public bool IsSealed { get; set; }
     [DataMember]
     public TypeKind TypeKind { get; private set; }
+    [DataMember]
+    public IEnumerable<MethodMetadata> ExtensionMethods { get; private set; } = new List<MethodMetadata>();
     
     private TypeMetadata(TypeInfo typeInfo, bool isPlaceholder)
     {
@@ -60,6 +63,8 @@ namespace TypeAnalyzer.Model
                      select AttributeMetadata.Analyze(attribute);
         IsSealed = typeInfo.IsSealed;
         TypeKind = typeInfo.GetTypeKind();
+        ExtensionMethods = from methodInfo in GetExtensionMethods(typeInfo)
+                           select new MethodMetadata(methodInfo);
       }
 
       TypeParameters = from typeParameter in typeInfo.GenericTypeParameters
@@ -117,6 +122,17 @@ namespace TypeAnalyzer.Model
       }
 
       return baseName;
+    }
+
+    // Searches only in assembly of a given type
+    private static IEnumerable<MethodInfo> GetExtensionMethods(TypeInfo searchType)
+    {
+      return from typeInfo in searchType.Assembly.DefinedTypes
+             where typeInfo.IsSealed && !typeInfo.IsGenericType && !typeInfo.IsNested
+             from method in typeInfo.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+             where method.IsDefined(typeof(ExtensionAttribute), false)
+             where method.GetParameters()[0].ParameterType.GetTypeInfo() == searchType
+             select method;
     }
   }
 }

@@ -55,6 +55,11 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       {
         Children.Add(new MethodsViewModel(_typeMetadata.Methods));
       }
+
+      if (_typeMetadata.ExtensionMethods.Any())
+      {
+        Children.Add(new MethodsViewModel(_typeMetadata.ExtensionMethods, "Extension Methods"));
+      }
     }
   }
 }
