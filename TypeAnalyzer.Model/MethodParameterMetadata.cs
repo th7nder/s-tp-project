@@ -1,5 +1,7 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.Serialization;
+using System.Linq;
 
 namespace TypeAnalyzer.Model
 {
@@ -14,6 +16,8 @@ namespace TypeAnalyzer.Model
     public MethodParameterKind Kind { get; private set; }
     [DataMember]
     public object DefaultValue { get; set; }
+    [DataMember]
+    public IEnumerable<AttributeMetadata> Attributes { get; private set; }
 
     public MethodParameterMetadata(ParameterInfo parameterInfo)
     {
@@ -21,6 +25,8 @@ namespace TypeAnalyzer.Model
       Kind = parameterInfo.GetKind();
       DefaultValue = !string.IsNullOrEmpty(parameterInfo.DefaultValue.ToString()) ? parameterInfo.DefaultValue : null;
       Type = TypeMetadata.Analyze(parameterInfo.ParameterType.GetTypeInfo());
+      Attributes = from attribute in parameterInfo.CustomAttributes
+                   select AttributeMetadata.Analyze(attribute);
     }
 
     public string GetSignature()
