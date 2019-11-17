@@ -46,6 +46,7 @@
     <Compile Include="AssemblyMetadata.cs" />
     <Compile Include="AttributeMetadata.cs" />
     <Compile Include="ConstructorMetadata.cs" />
+    <Compile Include="EventMetadata.cs" />
     <Compile Include="FieldMetadata.cs" />
     <Compile Include="MethodBaseMetadata.cs" />
     <Compile Include="MethodMetadata.cs" />

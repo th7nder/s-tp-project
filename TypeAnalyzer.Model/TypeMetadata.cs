@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -28,6 +27,8 @@ namespace TypeAnalyzer.Model
     public IEnumerable<MethodMetadata> Methods { get; private set; } = new List<MethodMetadata>();
     [DataMember]
     public IEnumerable<AttributeMetadata> Attributes { get; private set; } = new List<AttributeMetadata>();
+    [DataMember]
+    public IEnumerable<EventMetadata> Events { get; private set; } = new List<EventMetadata>();
     [DataMember]
     public IEnumerable<TypeMetadata> TypeParameters { get; private set; } = new List<TypeMetadata>();
     [DataMember]
@@ -72,6 +73,9 @@ namespace TypeAnalyzer.Model
 
         Methods = from method in typeInfo.DeclaredMethods
                   select new MethodMetadata(method);
+
+        Events = from eventItem in typeInfo.DeclaredEvents
+                 select new EventMetadata(eventItem);
         
         Attributes = from attribute in typeInfo.CustomAttributes
                      select AttributeMetadata.Analyze(attribute);
