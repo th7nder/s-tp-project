@@ -60,6 +60,8 @@
     <Compile Include="ViewModel\TreeItemViewModels\AttributesViewModel.cs" />
     <Compile Include="ViewModel\TreeItemViewModels\AttributeViewModel.cs" />
     <Compile Include="ViewModel\TreeItemViewModels\BaseTypesViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\ConstructorsViewModel.cs" />
+    <Compile Include="ViewModel\TreeItemViewModels\ConstructorViewModel.cs" />
     <Compile Include="ViewModel\TreeItemViewModels\FieldsViewModel.cs" />
     <Compile Include="ViewModel\TreeItemViewModels\FieldViewModel.cs" />
     <Compile Include="ViewModel\TreeItemViewModels\GenericParametersViewModel.cs" />

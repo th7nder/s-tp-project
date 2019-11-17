@@ -20,7 +20,7 @@ namespace TypeAnalyzer.Model
             return AccessModifier.None;
         }
 
-        public static AccessModifier GetAccessModifier(this MethodInfo methodInfo)
+        public static AccessModifier GetAccessModifier(this MethodBase methodInfo)
         {
             if (methodInfo.IsPrivate)
                 return AccessModifier.Private;

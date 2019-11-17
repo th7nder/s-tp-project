@@ -32,6 +32,11 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       
       Children.Add(new BaseTypesViewModel(_typeMetadata.BaseTypes));
 
+      if (_typeMetadata.Constructors.Any())
+      {
+        Children.Add(new ConstructorsViewModel(_typeMetadata.Constructors));
+      }
+      
       if (_typeMetadata.NestedTypes.Any())
       {
         Children.Add(new NestedTypesViewModel(_typeMetadata.NestedTypes));

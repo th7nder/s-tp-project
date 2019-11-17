@@ -23,6 +23,8 @@ namespace TypeAnalyzer.Model
     [DataMember]
     public IEnumerable<TypeMetadata> NestedTypes { get; private set; } = new List<TypeMetadata>();
     [DataMember]
+    public IEnumerable<ConstructorMetadata> Constructors { get; private set; } = new List<ConstructorMetadata>();
+    [DataMember]
     public IEnumerable<MethodMetadata> Methods { get; private set; } = new List<MethodMetadata>();
     [DataMember]
     public IEnumerable<AttributeMetadata> Attributes { get; private set; } = new List<AttributeMetadata>();
@@ -63,11 +65,15 @@ namespace TypeAnalyzer.Model
         NestedTypes = from nestedType in typeInfo.DeclaredNestedTypes
                       select Analyze(nestedType);
 
+        Constructors = from constructor in typeInfo.DeclaredConstructors
+                       select new ConstructorMetadata(constructor);
+
         Methods = from method in typeInfo.DeclaredMethods
                   select new MethodMetadata(method);
         
         Attributes = from attribute in typeInfo.CustomAttributes
                      select AttributeMetadata.Analyze(attribute);
+        
         IsSealed = typeInfo.IsSealed;
         IsPointer = typeInfo.IsPointer;
         TypeKind = typeInfo.GetTypeKind();

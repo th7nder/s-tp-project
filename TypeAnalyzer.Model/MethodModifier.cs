@@ -5,7 +5,7 @@ namespace TypeAnalyzer.Model
 {
   public static class MethodModifierUtils
   {
-    public static MethodModifier GetMethodModifier(this MethodInfo methodInfo)
+    public static MethodModifier GetMethodModifier(this MethodBase methodInfo)
     {
       if (methodInfo.IsStatic)
         return MethodModifier.Static;
