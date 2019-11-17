@@ -84,7 +84,6 @@ namespace TypeAnalyzer.Model
 
         DeclaringType = typeInfo.DeclaringType != null ? Analyze(typeInfo.DeclaringType.GetTypeInfo()) : null;
         IsSealed = typeInfo.IsSealed;
-        IsPointer = typeInfo.IsPointer;
         TypeKind = typeInfo.GetTypeKind();
         ExtensionMethods = from methodInfo in GetExtensionMethods(typeInfo)
                            select new MethodMetadata(methodInfo);
@@ -99,6 +98,7 @@ namespace TypeAnalyzer.Model
       AccessModifier = typeInfo.GetAccessModifier();
       GenericArguments = from generic in typeInfo.GetGenericArguments()
                          select Analyze(generic.GetTypeInfo());
+      IsPointer = typeInfo.IsPointer;
 
       Name = GetTypeSignature(typeInfo.Name);
       IsPlaceholder = isPlaceholder;
@@ -142,8 +142,9 @@ namespace TypeAnalyzer.Model
 
       if (types != null)
       {
-        return $"{baseName}<{string.Join(", ", types)}>";
+        return $"{baseName.Substring(0, baseName.Length - (baseName.Length - baseName.IndexOf('`')))}<{string.Join(", ", types)}>";
       }
+
 
       return baseName;
     }

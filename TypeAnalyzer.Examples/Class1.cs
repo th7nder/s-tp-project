@@ -29,6 +29,9 @@ namespace TypeAnalyzer.Examples
     {
       second = true;
     }
+    protected void Protected() { }
+    protected internal void ProtectedInternal() { }
+    private protected void PrivateProtected() { }
   }
 
   public interface ISomething
@@ -45,6 +48,11 @@ namespace TypeAnalyzer.Examples
     {
 
     } 
+  }
+
+  internal struct TestStruct
+  {
+
   }
 
   [Test]

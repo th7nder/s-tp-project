@@ -18,12 +18,13 @@ namespace TypeAnalyzer.Model
         return TypeKind.Interface;
       if (typeInfo.IsAbstract)
         return TypeKind.AbstractClass;
+      if (typeInfo.IsEnum)
+        return TypeKind.Enum;
       if (typeInfo.IsValueType)
         return TypeKind.ValueType;
       if (typeInfo.IsClass)
         return TypeKind.Class;
-      if (typeInfo.IsEnum)
-        return TypeKind.Enum;
+      
       
       return TypeKind.None;
     }
