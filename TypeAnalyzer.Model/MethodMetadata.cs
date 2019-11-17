@@ -14,11 +14,11 @@ namespace TypeAnalyzer.Model
     [DataMember]
     public TypeMetadata ReturnType { get; private set; }
     [DataMember]
-    public IEnumerable<MethodParameterMetadata> Parameters { get; }
+    public IEnumerable<MethodParameterMetadata> Parameters { get; private set; }
     [DataMember]
-    public IEnumerable<AttributeMetadata> Attributes { get; }
+    public IEnumerable<AttributeMetadata> Attributes { get; private set; }
     [DataMember]
-    public IEnumerable<TypeMetadata> GenericArguments { get; }
+    public IEnumerable<TypeMetadata> GenericArguments { get; private set; }
     [DataMember] 
     public AccessModifier AccessModifier { get; set; }
 

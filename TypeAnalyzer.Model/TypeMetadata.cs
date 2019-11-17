@@ -11,23 +11,24 @@ namespace TypeAnalyzer.Model
   {
     [DataMember]
     public string Name { get; private set;  }
-    public bool IsPlaceholder { get; }
     [DataMember]
-    public IEnumerable<PropertyMetadata> Properties { get; }
+    public bool IsPlaceholder { get; private set; }
     [DataMember]
-    public IEnumerable<FieldMetadata> Fields { get; }
+    public IEnumerable<PropertyMetadata> Properties { get; private set; } = new List<PropertyMetadata>();
     [DataMember]
-    public IEnumerable<TypeMetadata> BaseTypes { get; }
+    public IEnumerable<FieldMetadata> Fields { get; private set; } = new List<FieldMetadata>();
     [DataMember]
-    public IEnumerable<MethodMetadata> Methods { get; }
+    public IEnumerable<TypeMetadata> BaseTypes { get; private set; } = new List<TypeMetadata>();
     [DataMember]
-    public IEnumerable<AttributeMetadata> Attributes { get; }
+    public IEnumerable<MethodMetadata> Methods { get; private set; } = new List<MethodMetadata>();
     [DataMember]
-    public IEnumerable<TypeMetadata> TypeParameters { get; }
+    public IEnumerable<AttributeMetadata> Attributes { get; private set; } = new List<AttributeMetadata>();
     [DataMember]
-    public IEnumerable<TypeMetadata> TypeArguments { get; }
+    public IEnumerable<TypeMetadata> TypeParameters { get; private set; } = new List<TypeMetadata>();
     [DataMember]
-    public IEnumerable<TypeMetadata> GenericArguments { get; }
+    public IEnumerable<TypeMetadata> TypeArguments { get; private set; } = new List<TypeMetadata>();
+    [DataMember]
+    public IEnumerable<TypeMetadata> GenericArguments { get; private set; } = new List<TypeMetadata>();
     [DataMember] 
     public AccessModifier AccessModifier { get; set; }
     [DataMember]

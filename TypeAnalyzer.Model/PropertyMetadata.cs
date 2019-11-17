@@ -14,9 +14,9 @@ namespace TypeAnalyzer.Model
     [DataMember]
     public TypeMetadata TypeMetadata { get; private set; }
     [DataMember]
-    public IEnumerable<MethodMetadata> Accessors { get; }
+    public IEnumerable<MethodMetadata> Accessors { get; private set; }
     [DataMember]
-    public IEnumerable<AttributeMetadata> Attributes { get; }
+    public IEnumerable<AttributeMetadata> Attributes { get; private set; }
     [DataMember] 
     public AccessModifier AccessModifier { get; set; }
     public PropertyMetadata(PropertyInfo property)

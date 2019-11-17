@@ -11,7 +11,7 @@ namespace TypeAnalyzer.Model
     [DataMember]
     public string Name { get; private set; }
     [DataMember]
-    public IEnumerable<TypeMetadata> Types { get; }
+    public IEnumerable<TypeMetadata> Types { get; private set; }
     public NamespaceMetadata(string name, IEnumerable<TypeInfo> types)
     {
       Name = name;

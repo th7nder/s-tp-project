@@ -14,8 +14,9 @@
     <DockPanel> 
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="_Open" Command="{Binding BrowseCommand}"/>
+                <MenuItem Header="_Open DLL" Command="{Binding LoadDLLCommand}"/>
                 <MenuItem Header="_Save XML" Command="{Binding SaveXMLCommand}"/>
+                <MenuItem Header="_Load XML" Command="{Binding LoadXMLCommand}"/>
                 <Separator/>
                 <MenuItem Header="_Exit"/>
             </MenuItem>

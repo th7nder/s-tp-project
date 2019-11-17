@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
@@ -12,16 +13,11 @@ namespace TypeAnalyzer.ViewModel
 {
   class TypeAnalyzerViewModel : ViewModelBase
   {
-    public TypeAnalyzerViewModel()
-    {
-      BrowseCommand = new RelayCommand(Browse);
-      SaveXMLCommand = new RelayCommand(SaveXML);
-    }
-
     public ObservableCollection<TreeItemViewModel> AssemblyModel { get; set; } = new ObservableCollection<TreeItemViewModel>();
 
-    public ICommand BrowseCommand { get; }
+    public ICommand LoadDLLCommand { get; }
     public ICommand SaveXMLCommand { get; }
+    public ICommand LoadXMLCommand { get; }
 
     private string _pathVariable;
     public string PathVariable
@@ -33,37 +29,66 @@ namespace TypeAnalyzer.ViewModel
         {
           _pathVariable = value;
           RaisePropertyChanged();
-          assemblyMetadata = new AssemblyMetadata(Assembly.LoadFrom(_pathVariable));
-          AssemblyViewModel model = new AssemblyViewModel(assemblyMetadata);
-          AssemblyModel.Add(model);
         }
       }
     }
-
-    private AssemblyMetadata assemblyMetadata = null;
-    private void Browse()
+    public TypeAnalyzerViewModel()
     {
-      PathVariable = GetPath();
+      LoadDLLCommand = new RelayCommand(LoadDLL);
+      SaveXMLCommand = new RelayCommand(SaveXML);
+      LoadXMLCommand = new RelayCommand(LoadXML);
+    }
+
+    private AssemblyMetadata _assemblyMetadata = null;
+    private void LoadDLL()
+    {
+      PathVariable = GetFilePath(FILTER_DLL);
+      if (_pathVariable != null)
+      {
+        AssemblyMetadata assemblyMetadata = new AssemblyMetadata(Assembly.LoadFrom(_pathVariable));
+        LoadAssemblyMetadata(assemblyMetadata);
+      }
     }
 
     private void SaveXML()
     {
-      if (assemblyMetadata == null)
+      if (_assemblyMetadata == null)
       {
         ShowErrorBox("There is no assembly to save");
         return;
       }
 
-      string savePath = GetSavePath();
+      string savePath = GetSavePath(FILTER_XML);
       if (savePath == null)
       {
         return;
       }
 
       XmlSerialization xmlSerialization = new XmlSerialization();
-      xmlSerialization.WriteFile(assemblyMetadata, savePath);
+      xmlSerialization.WriteFile(_assemblyMetadata, savePath);
 
       MessageBox.Show($"Succesfully serialized data to {savePath}", "Data serializaton", MessageBoxButton.OK, MessageBoxImage.Information);
+    }
+
+    private void LoadXML()
+    {
+      PathVariable = GetFilePath(FILTER_XML);
+      if (PathVariable == null)
+      {
+        return;
+      }
+
+      XmlSerialization xmlSerialization = new XmlSerialization();
+      AssemblyMetadata assemblyMetadata = xmlSerialization.ReadFile<AssemblyMetadata>(PathVariable, FileMode.Open);
+      LoadAssemblyMetadata(assemblyMetadata);
+    }
+
+    private void LoadAssemblyMetadata(AssemblyMetadata assemblyMetadata)
+    {
+      _assemblyMetadata = assemblyMetadata;
+      AssemblyViewModel model = new AssemblyViewModel(assemblyMetadata);
+      AssemblyModel.Clear();
+      AssemblyModel.Add(model);
     }
 
     private MessageBoxResult ShowErrorBox(string message)
@@ -71,11 +96,11 @@ namespace TypeAnalyzer.ViewModel
       return MessageBox.Show(message, "Error occured", MessageBoxButton.OK, MessageBoxImage.Error);
     }
 
-    private string GetSavePath()
+    private string GetSavePath(string filter)
     {
       SaveFileDialog saveFileDialog = new SaveFileDialog()
       {
-        Filter = "XML File (*.xml)|*.xml",
+        Filter = filter,
       };
 
       if (saveFileDialog.ShowDialog() == true)
@@ -86,10 +111,11 @@ namespace TypeAnalyzer.ViewModel
       return null;
     }
 
-    private string GetPath()
+    private string GetFilePath(string filter)
     {
       OpenFileDialog openFileDialog = new OpenFileDialog
       {
+        Filter = filter,
         Multiselect = false
       };
       if (openFileDialog.ShowDialog() == true)
@@ -99,5 +125,8 @@ namespace TypeAnalyzer.ViewModel
 
       return null;
     }
+
+    private const string FILTER_XML = "XML File (*.xml)|*.xml";
+    private const string FILTER_DLL = "DLL File (*.dll)|*.dll";
   }
 }

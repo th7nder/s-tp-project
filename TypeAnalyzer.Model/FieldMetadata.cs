@@ -13,7 +13,7 @@ namespace TypeAnalyzer.Model
         [DataMember]
         public TypeMetadata Type { get; private set; }
         [DataMember]
-        public IEnumerable<AttributeMetadata> Attributes { get; }
+        public IEnumerable<AttributeMetadata> Attributes { get; private set; }
         [DataMember] 
         public AccessModifier AccessModifier { get; set; }
         

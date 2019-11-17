@@ -9,7 +9,7 @@ namespace TypeAnalyzer.Model
   public class AssemblyMetadata
   {
     [DataMember]
-    public IEnumerable<NamespaceMetadata> Namespaces { get; }
+    public IEnumerable<NamespaceMetadata> Namespaces { get; private set; }
     [DataMember]
     public string Name { get; private set;  }
     public AssemblyMetadata(Assembly assembly)
