@@ -31,12 +31,11 @@ namespace TypeAnalyzer.Model
 
     public string GetSignature()
     {
-      string defaultValue = DefaultValue != null ? " = " + DefaultValue.ToString() : "";
+      string defaultValue = DefaultValue != null ? " = " + DefaultValue : "";
       if (Kind == MethodParameterKind.None)
-        return $"{Name}{defaultValue}";
-
+        return $"{Type.Name} {Name}{defaultValue}";
       
-      return $"{Kind.ToString().ToLower()} {Name}{defaultValue}";
+      return $"{Kind.ToString().ToLower()} {Type.Name} {Name}{defaultValue}";
     }
   }
 
