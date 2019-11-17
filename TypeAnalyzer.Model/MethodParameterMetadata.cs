@@ -35,7 +35,7 @@ namespace TypeAnalyzer.Model
       if (Kind == MethodParameterKind.None)
         return $"{Type.Name} {Name}{defaultValue}";
       
-      return $"{Kind.ToString().ToLower()}{Type.Name} {Name}{defaultValue}";
+      return $"{Kind.ToString().ToLower()} {Type.Name} {Name}{defaultValue}";
     }
   }
 
