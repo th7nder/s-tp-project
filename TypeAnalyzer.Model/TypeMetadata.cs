@@ -21,6 +21,8 @@ namespace TypeAnalyzer.Model
     [DataMember]
     public IEnumerable<TypeMetadata> BaseTypes { get; private set; } = new List<TypeMetadata>();
     [DataMember]
+    public IEnumerable<TypeMetadata> NestedTypes { get; private set; } = new List<TypeMetadata>();
+    [DataMember]
     public IEnumerable<MethodMetadata> Methods { get; private set; } = new List<MethodMetadata>();
     [DataMember]
     public IEnumerable<AttributeMetadata> Attributes { get; private set; } = new List<AttributeMetadata>();
@@ -55,6 +57,9 @@ namespace TypeAnalyzer.Model
                   .Concat(typeInfo.ImplementedInterfaces)
                   .Where(type => type != null)
                   .Select(type => Analyze(type.GetTypeInfo()));
+        
+        NestedTypes = from nestedType in typeInfo.DeclaredNestedTypes
+                      select Analyze(nestedType);
 
         Methods = from method in typeInfo.DeclaredMethods
                   select new MethodMetadata(method);
