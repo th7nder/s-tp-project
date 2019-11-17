@@ -51,7 +51,13 @@ namespace TypeAnalyzer.Examples
   {
     
     public Class1 Class { get; set; }
-    public Animals animalField;
+    public Animals AnimalField;
+
+    private Class1(Animals animalField)
+    {
+      AnimalField = animalField;
+    }
+    
     public string Concat(string a, string b)
     {
       return a + b;
@@ -69,6 +75,11 @@ namespace TypeAnalyzer.Examples
     private sealed class NestedPrivate<K>
     {
       private void PrivateMethod<T>(T a, T b)
+      {
+        
+      }
+
+      private unsafe void PointerMagic(int* omg)
       {
         
       }

@@ -28,9 +28,15 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       Children.Add(new DetailViewModel("Type Kind: ", _typeMetadata.TypeKind.ToString()));
       Children.Add(new DetailViewModel("Access Level: ", _typeMetadata.AccessModifier.ToString()));
       Children.Add(new DetailViewModel("Is Sealed: ", _typeMetadata.IsSealed.ToString()));
+      Children.Add(new DetailViewModel("Is Pointer: ", _typeMetadata.IsPointer.ToString()));
       
       Children.Add(new BaseTypesViewModel(_typeMetadata.BaseTypes));
 
+      if (_typeMetadata.Constructors.Any())
+      {
+        Children.Add(new ConstructorsViewModel(_typeMetadata.Constructors));
+      }
+      
       if (_typeMetadata.NestedTypes.Any())
       {
         Children.Add(new NestedTypesViewModel(_typeMetadata.NestedTypes));

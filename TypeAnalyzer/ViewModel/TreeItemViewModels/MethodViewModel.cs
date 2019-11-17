@@ -28,7 +28,6 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
         parameterSignatures[0] = $"this {parameterSignatures[0]}";
       }
 
-
       List<string> genericsNames = (from genericArgument in _methodMetadata.GenericArguments
                                     select genericArgument.Name).ToList();
 
