@@ -12,7 +12,7 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       _typeMetadata = typeMetadata;
       Name = typeMetadata.Name;
 
-      if (_typeMetadata.IsPlaceholder)
+      if (_typeMetadata.IsPlaceholder && _typeMetadata.ArrayRank == 0)
       {
         Children.Clear();
       }
@@ -20,6 +20,11 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 
     protected override void BuildMyself()
     {
+      if (_typeMetadata.ArrayRank > 0)
+      {
+        Children.Add(new DetailViewModel("Array Rank: ", _typeMetadata.ArrayRank.ToString()));
+      }
+
       if (_typeMetadata.IsPlaceholder)
       {
         return;

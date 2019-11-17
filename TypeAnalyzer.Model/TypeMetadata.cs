@@ -46,6 +46,8 @@ namespace TypeAnalyzer.Model
     public IEnumerable<MethodMetadata> ExtensionMethods { get; private set; } = new List<MethodMetadata>();
     [DataMember]
     public TypeMetadata DeclaringType { get; set; }
+    [DataMember]
+    public int ArrayRank { get; set; }
     
     private TypeMetadata(TypeInfo typeInfo, bool isPlaceholder)
     {
@@ -84,6 +86,7 @@ namespace TypeAnalyzer.Model
                            select new MethodMetadata(methodInfo);
       }
 
+      ArrayRank = typeInfo.IsArray ? typeInfo.GetArrayRank() : 0;
       TypeParameters = from typeParameter in typeInfo.GenericTypeParameters
                        select Analyze(typeParameter.GetTypeInfo());
       TypeArguments = from typeArgument in typeInfo.GenericTypeArguments
@@ -141,7 +144,7 @@ namespace TypeAnalyzer.Model
       return baseName;
     }
 
-    // Searches only in assembly of a given type
+    // Searches only in the assembly of the given type
     private static IEnumerable<MethodInfo> GetExtensionMethods(TypeInfo searchType)
     {
       return from typeInfo in searchType.Assembly.DefinedTypes

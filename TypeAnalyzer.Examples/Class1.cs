@@ -40,6 +40,7 @@ namespace TypeAnalyzer.Examples
 
   public static class ExtensionClass
   {
+    public static int[, ,] array = new int[1,2,3];
     public static void ExtensionMethod(this Class1 obj)
     {
 
