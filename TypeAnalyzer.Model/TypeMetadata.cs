@@ -37,6 +37,8 @@ namespace TypeAnalyzer.Model
     [DataMember]
     public bool IsSealed { get; set; }
     [DataMember]
+    public bool IsPointer { get; set; }
+    [DataMember]
     public TypeKind TypeKind { get; private set; }
     [DataMember]
     public IEnumerable<MethodMetadata> ExtensionMethods { get; private set; } = new List<MethodMetadata>();
@@ -67,6 +69,7 @@ namespace TypeAnalyzer.Model
         Attributes = from attribute in typeInfo.CustomAttributes
                      select AttributeMetadata.Analyze(attribute);
         IsSealed = typeInfo.IsSealed;
+        IsPointer = typeInfo.IsPointer;
         TypeKind = typeInfo.GetTypeKind();
         ExtensionMethods = from methodInfo in GetExtensionMethods(typeInfo)
                            select new MethodMetadata(methodInfo);

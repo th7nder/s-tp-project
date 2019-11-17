@@ -72,6 +72,11 @@ namespace TypeAnalyzer.Examples
       {
         
       }
+
+      private unsafe void PointerMagic(int* omg)
+      {
+        
+      }
     }
   }
 }
