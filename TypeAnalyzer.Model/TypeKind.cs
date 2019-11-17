@@ -12,6 +12,8 @@ namespace TypeAnalyzer.Model
   {
     public static TypeKind GetTypeKind(this TypeInfo typeInfo)
     {
+      if (typeInfo.IsAbstract && typeInfo.IsSealed)
+        return TypeKind.Static;
       if (typeInfo.IsInterface)
         return TypeKind.Interface;
       if (typeInfo.IsAbstract)
@@ -22,7 +24,7 @@ namespace TypeAnalyzer.Model
         return TypeKind.Class;
       if (typeInfo.IsEnum)
         return TypeKind.Enum;
-
+      
       return TypeKind.None;
     }
   }
@@ -41,6 +43,8 @@ namespace TypeAnalyzer.Model
     Class,
     [EnumMember]
     Enum,
+    [EnumMember]
+    Static,
     [EnumMember]
     None
   }
