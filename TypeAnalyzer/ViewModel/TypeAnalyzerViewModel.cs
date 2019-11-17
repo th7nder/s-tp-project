@@ -45,7 +45,7 @@ namespace TypeAnalyzer.ViewModel
       PathVariable = GetFilePath(FILTER_DLL);
       if (_pathVariable != null)
       {
-        AssemblyMetadata assemblyMetadata = new AssemblyMetadata(Assembly.LoadFrom(_pathVariable));
+        AssemblyMetadata assemblyMetadata = new Reflector(_pathVariable).AssemblyMetadata;
         LoadAssemblyMetadata(assemblyMetadata);
       }
     }

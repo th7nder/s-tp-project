@@ -54,6 +54,7 @@
     <Compile Include="MethodParameterMetadata.cs" />
     <Compile Include="NamespaceMetadata.cs" />
     <Compile Include="PropertyMetadata.cs" />
+    <Compile Include="Reflector.cs" />
     <Compile Include="Serialization\XmlSerialization.cs" />
     <Compile Include="TypeKind.cs" />
     <Compile Include="TypeMetadata.cs" />
