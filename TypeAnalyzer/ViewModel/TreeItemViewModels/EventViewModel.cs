@@ -4,25 +4,26 @@ using TypeAnalyzer.Model;
 
 namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 {
-    public class EventViewModel : TreeItemViewModel
+  public class EventViewModel : TreeItemViewModel
+  {
+    private readonly EventMetadata _eventMetadata;
+
+    public EventViewModel(EventMetadata eventMetadata)
     {
-        private readonly EventMetadata _eventMetadata;
-        
-        public EventViewModel(EventMetadata eventMetadata)
-        {
-            _eventMetadata = eventMetadata;
-            Name = eventMetadata.Name;
-        }
-        
-        protected override void BuildMyself()
-        {
-            Children.Add(new DetailViewModel("Name: ", _eventMetadata.Name));
-            Children.Add(new DetailViewModel("Is multicast: ", _eventMetadata.IsMulticast.ToString()));
-            
-            if (_eventMetadata.Attributes.Any())
-            {
-                Children.Add(new AttributesViewModel(_eventMetadata.Attributes));  
-            }
-        }
+      _eventMetadata = eventMetadata;
+      Name = eventMetadata.Name;
     }
+
+    protected override void BuildMyself()
+    {
+      Children.Add(new DetailViewModel("Name: ", _eventMetadata.Name));
+      Children.Add(new DetailViewModel("Is multicast: ", _eventMetadata.IsMulticast.ToString()));
+      Children.Add(new DetailViewModel("Event handler: ", _eventMetadata.EventType.Name, new TypeViewModel(_eventMetadata.EventType)));
+
+      if (_eventMetadata.Attributes.Any())
+      {
+        Children.Add(new AttributesViewModel(_eventMetadata.Attributes));
+      }
+    }
+  }
 }
