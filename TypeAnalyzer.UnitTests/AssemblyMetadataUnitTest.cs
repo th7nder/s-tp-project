@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeAnalyzer.Model;
@@ -22,7 +21,7 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void AssemblyMetadata_ParsesNamespace()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
       Assert.IsTrue(namespaceMetadata.Types.Count() > 5);
     }
@@ -30,7 +29,7 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void AssemblyMetadata_ParsesType()
     {
-      TypeMetadata typeMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single().Types.Single(type => type.Name == "Class1");
+      TypeMetadata typeMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First().Types.Single(type => type.Name == "Class1");
 
       Assert.IsNotNull(typeMetadata);
     }
@@ -38,7 +37,7 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void TypeMetadata_ParsesTypePropertyRecursively()
     {
-      TypeMetadata typeMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single().Types.Single(type => type.Name == "Class1");
+      TypeMetadata typeMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First().Types.Single(type => type.Name == "Class1");
 
       PropertyMetadata propertyMetadata = typeMetadata.Properties.Single(prop => prop.Name == "Class");
 
@@ -49,12 +48,12 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void TypeMetadata_DoesNotDuplicateAttributeMetadata()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
       TypeMetadata attributedClass = namespaceMetadata.Types.Single(type => type.Name == "Class1");
       PropertyMetadata attributedProperty = namespaceMetadata.Types.Single(type => type.Name == "BaseClass").Properties.Single(property => property.Name == "Class");
 
-      AttributeMetadata classAttribute = attributedClass.Attributes.Single(attribute => attribute.Type.Name == "TestAttribute");
-      AttributeMetadata propertyAttribute = attributedProperty.Attributes.Single(attribute => attribute.Type.Name == "TestAttribute");
+      AttributeMetadata classAttribute = attributedClass.Attributes.First(attribute => attribute.Type.Name == "TestAttribute");
+      AttributeMetadata propertyAttribute = attributedProperty.Attributes.First(attribute => attribute.Type.Name == "TestAttribute");
 
       Assert.AreSame(classAttribute, propertyAttribute);
     }
@@ -62,7 +61,7 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void TypeMetadata_RecognizesTypeKind()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
       TypeMetadata staticClass = namespaceMetadata.Types.Single(type => type.Name == "ExtensionClass");
       TypeMetadata interfaceType = namespaceMetadata.Types.Single(type => type.Name == "ISomething");
@@ -82,12 +81,12 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void TypeMetadata_RecognizesGenerics()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
       TypeMetadata genericType = namespaceMetadata.Types.Single(type => type.Name == "ClosedOpenType<R>");
-      TypeMetadata genericTypeBase = genericType.BaseTypes.Single();
+      TypeMetadata genericTypeBase = genericType.BaseTypes.First();
 
-      Assert.AreEqual("R", genericType.TypeParameters.Single().Name);
+      Assert.AreEqual("R", genericType.TypeParameters.First().Name);
       Assert.IsNotNull(genericTypeBase.TypeArguments.Single(type => type.Name == "Int32"));
       Assert.IsNotNull(genericTypeBase.TypeArguments.Single(type => type.Name == "String"));
     }
@@ -95,10 +94,10 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void TypeMetadata_ChecksDeclaringType()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
       TypeMetadata genericType = namespaceMetadata.Types.Single(type => type.Name == "ClosedOpenType<R>");
-      TypeMetadata genericTypeParameter = genericType.TypeParameters.Single();
+      TypeMetadata genericTypeParameter = genericType.TypeParameters.First();
 
       Assert.AreSame(genericType, genericTypeParameter.DeclaringType);
     }
@@ -107,15 +106,15 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void TypeMetadata_RecognizesAccessLevel()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
       TypeMetadata internalType = namespaceMetadata.Types.Single(type => type.Name == "Class1");
       TypeMetadata enumType = namespaceMetadata.Types.Single(type => type.Name == "Animals");
       TypeMetadata privateType = namespaceMetadata.Types.Single(type => type.Name == "NestedPrivate<K>");
       TypeMetadata publicType = namespaceMetadata.Types.Single(type => type.Name == "ISomething");
-      AccessModifier protectedTypeModifier = namespaceMetadata.Types.Single(type => type.Name == "BaseClass").Methods.Single(method => method.Name == "Protected").AccessModifier;
-      AccessModifier protectedInternalTypeModifier = namespaceMetadata.Types.Single(type => type.Name == "BaseClass").Methods.Single(method => method.Name == "ProtectedInternal").AccessModifier;
-      AccessModifier privateProtectedTypeModifier = namespaceMetadata.Types.Single(type => type.Name == "BaseClass").Methods.Single(method => method.Name == "PrivateProtected").AccessModifier;
+      AccessModifier protectedTypeModifier = namespaceMetadata.Types.Single(type => type.Name == "BaseClass").Methods.First(method => method.Name == "Protected").AccessModifier;
+      AccessModifier protectedInternalTypeModifier = namespaceMetadata.Types.Single(type => type.Name == "BaseClass").Methods.First(method => method.Name == "ProtectedInternal").AccessModifier;
+      AccessModifier privateProtectedTypeModifier = namespaceMetadata.Types.Single(type => type.Name == "BaseClass").Methods.First(method => method.Name == "PrivateProtected").AccessModifier;
 
       Assert.AreEqual(AccessModifier.Internal, internalType.AccessModifier);
       Assert.AreEqual(AccessModifier.None, enumType.AccessModifier);
@@ -130,7 +129,7 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void TypeMetadata_ChecksIfTypeIsSealed()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
       TypeMetadata sealedType = namespaceMetadata.Types.Single(type => type.Name == "NestedPrivate<K>");
       TypeMetadata unsealedType = namespaceMetadata.Types.Single(type => type.Name == "Class1");
@@ -142,9 +141,9 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void TypeMetadata_ChecksIfTypeIsPointer()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
-      TypeMetadata pointerType = namespaceMetadata.Types.Single(type => type.Name == "NestedPrivate<K>").Methods.Single(method => method.Name == "PointerMagic").Parameters.Single().Type;
+      TypeMetadata pointerType = namespaceMetadata.Types.Single(type => type.Name == "NestedPrivate<K>").Methods.First(method => method.Name == "PointerMagic").Parameters.First().Type;
 
       Assert.IsTrue(pointerType.IsPointer);
     }
@@ -152,7 +151,7 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void TypeMetadata_LoadsBaseTypes()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
       TypeMetadata childType = namespaceMetadata.Types.Single(type => type.Name == "Class1");
 
@@ -162,27 +161,27 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void TypeMetadata_LoadsNestedTypes()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
       TypeMetadata withNestedType = namespaceMetadata.Types.Single(type => type.Name == "Class1");
 
-      Assert.AreEqual(2, withNestedType.NestedTypes.Count());
+      Assert.AreEqual(5, withNestedType.NestedTypes.Count());
     }
 
     [TestMethod]
     public void TypeMetadata_LoadsAttributes()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
       TypeMetadata attributeType = namespaceMetadata.Types.Single(type => type.Name == "Class1");
 
-      Assert.AreEqual("TestAttribute", attributeType.Attributes.Single().Type.Name);
+      Assert.AreEqual("TestAttribute", attributeType.Attributes.First().Type.Name);
     }
 
     [TestMethod]
     public void TypeMetadata_LoadsProperties()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
       TypeMetadata withPropertiesType = namespaceMetadata.Types.Single(type => type.Name == "BaseClass");
 
@@ -192,10 +191,10 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void TypeMetadata_LoadsEvents()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
       TypeMetadata eventType = namespaceMetadata.Types.Single(type => type.Name == "Class1");
-      EventMetadata eventMetadata = eventType.Events.Single();
+      EventMetadata eventMetadata = eventType.Events.First();
 
       Assert.AreEqual("SomeEvent", eventMetadata.Name);
       Assert.AreEqual("EventHandler", eventMetadata.EventType.Name);
@@ -204,10 +203,10 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void TypeMetadata_LoadsFields()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
       TypeMetadata fieldType = namespaceMetadata.Types.Single(type => type.Name == "Class1");
-      FieldMetadata fieldMetadata = fieldType.Fields.Single(field => field.Name == "AnimalField");
+      FieldMetadata fieldMetadata = fieldType.Fields.First(field => field.Name == "AnimalField");
 
       Assert.AreEqual("Animals", fieldMetadata.Type.Name);
     }
@@ -215,20 +214,11 @@ namespace TypeAnalyzer.UnitTests
     [TestMethod]
     public void TypeMetadata_LoadsExtensionMethods()
     {
-      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.Single();
+      NamespaceMetadata namespaceMetadata = TestReflector.Reflector.AssemblyMetadata.Namespaces.First();
 
       TypeMetadata extensionType = namespaceMetadata.Types.Single(type => type.Name == "Class1");
 
       Assert.AreEqual(1, extensionType.ExtensionMethods.Count());
-    }
-
-    private class TestReflector : Reflector
-    {
-      private const string ASSEMBLY_LOCATION = @"TestDLL\TypeAnalyzer.Examples.dll";
-      public TestReflector() : base(ASSEMBLY_LOCATION) { }
-
-      private static Lazy<TestReflector> _reflector = new Lazy<TestReflector>(() => new TestReflector());
-      public static TestReflector Reflector => _reflector.Value;
     }
   }
 }

@@ -25,6 +25,7 @@ namespace TypeAnalyzer.Examples
     public IEnumerable<string> Enumerable { get; set; }
     public static void Static() { }
     public abstract void Abstract();
+    [Test]
     public void Test1(in bool first, out bool second, ref int third, [Test] int optional = 5)
     {
       second = true;
@@ -58,8 +59,8 @@ namespace TypeAnalyzer.Examples
   [Test]
   internal class Class1 : BaseClass, ISomething
   {
-    
     public Class1 Class { get; set; }
+    [Test]
     public Animals AnimalField;
     [Test]
     public event EventHandler SomeEvent;
@@ -94,6 +95,41 @@ namespace TypeAnalyzer.Examples
       {
         
       }
+    }
+
+    public class FieldTest
+    {
+      private int privateField;
+      protected int protectedField;
+      public int publicField;
+      internal int internalField;
+      protected internal int protectedInternalField;
+      private protected int privateProtectedField;
+    }
+
+    public abstract class MethodTest
+    {
+      private void Private() { }
+      protected void Protected() { }
+      public void Public() { }
+      internal void Internal() { }
+      protected internal void ProtectedInternal() { }
+      private protected void PrivateProtected() { }
+
+      public abstract void Abstract();
+      static void Static() { }
+      public virtual void Virtual() { }
+      
+    }
+
+    public class MethodFinalTest : MethodTest
+    {
+      public override void Abstract()
+      {
+        throw new NotImplementedException();
+      }
+
+      public override sealed void Virtual() { }
     }
   }
 }

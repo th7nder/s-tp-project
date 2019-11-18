@@ -50,7 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyMetadataUnitTest.cs" />
+    <Compile Include="FieldMetadataUnitTests.cs" />
+    <Compile Include="MethodMetadataUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyMetadataUnitTests.cs" />
+    <Compile Include="TestReflector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
