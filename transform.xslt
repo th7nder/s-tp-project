@@ -154,6 +154,10 @@
                         fixHeader(newNode);
 
                         const oldContainer = oldNode.querySelector(":scope > .node-container");
+                        if (oldContainer === null) {
+                            return;
+                        }
+
                         const newContainer = document.importNode(oldContainer, false);
 
                         for (const child of oldContainer.childNodes) {
