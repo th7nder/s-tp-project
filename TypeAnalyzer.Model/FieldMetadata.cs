@@ -5,25 +5,25 @@ using System.Runtime.Serialization;
 
 namespace TypeAnalyzer.Model
 {
-    [DataContract(Namespace = "")]
-    public class FieldMetadata
+  [DataContract(Namespace = "")]
+  public class FieldMetadata
+  {
+    [DataMember]
+    public string Name { get; private set; }
+    [DataMember]
+    public TypeMetadata Type { get; private set; }
+    [DataMember]
+    public IEnumerable<AttributeMetadata> Attributes { get; private set; }
+    [DataMember]
+    public AccessModifier AccessModifier { get; set; }
+
+    public FieldMetadata(FieldInfo fieldInfo)
     {
-        [DataMember]
-        public string Name { get; private set; }
-        [DataMember]
-        public TypeMetadata Type { get; private set; }
-        [DataMember]
-        public IEnumerable<AttributeMetadata> Attributes { get; private set; }
-        [DataMember] 
-        public AccessModifier AccessModifier { get; set; }
-        
-        public FieldMetadata(FieldInfo fieldInfo)
-        {
-            Name = fieldInfo.Name;
-            Type = TypeMetadata.Analyze(fieldInfo.FieldType.GetTypeInfo());
-            Attributes = from attribute in fieldInfo.CustomAttributes
-                         select AttributeMetadata.Analyze(attribute);
-            AccessModifier = fieldInfo.GetAccessModifier();
-        }
+      Name = fieldInfo.Name;
+      Type = TypeMetadata.Analyze(fieldInfo.FieldType.GetTypeInfo());
+      Attributes = from attribute in fieldInfo.CustomAttributes
+                   select AttributeMetadata.Analyze(attribute);
+      AccessModifier = fieldInfo.GetAccessModifier();
     }
+  }
 }

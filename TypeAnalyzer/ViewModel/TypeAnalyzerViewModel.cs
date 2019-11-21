@@ -1,11 +1,9 @@
-﻿using Microsoft.Win32;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using System.Reflection;
-using System.Windows;
 using System.Windows.Input;
 using TypeAnalyzer.Model;
 using TypeAnalyzer.Model.Serialization;
+using TypeAnalyzer.View;
 using TypeAnalyzer.ViewModel.MVVM;
 using TypeAnalyzer.ViewModel.TreeItemViewModels;
 
@@ -32,17 +30,20 @@ namespace TypeAnalyzer.ViewModel
         }
       }
     }
-    public TypeAnalyzerViewModel()
+    public TypeAnalyzerViewModel(IUserInterface userInterface)
     {
+      _userInterface = userInterface;
       LoadDLLCommand = new RelayCommand(LoadDLL);
       SaveXMLCommand = new RelayCommand(SaveXML);
       LoadXMLCommand = new RelayCommand(LoadXML);
     }
 
     private AssemblyMetadata _assemblyMetadata = null;
+    private readonly IUserInterface _userInterface;
+
     private void LoadDLL()
     {
-      PathVariable = GetFilePath(FILTER_DLL);
+      PathVariable = _userInterface.GetFilePath(FileType.DLL);
       if (_pathVariable != null)
       {
         AssemblyMetadata assemblyMetadata = new Reflector(_pathVariable).AssemblyMetadata;
@@ -54,11 +55,11 @@ namespace TypeAnalyzer.ViewModel
     {
       if (_assemblyMetadata == null)
       {
-        ShowErrorBox("There is no assembly to save");
+        _userInterface.DisplayErrorMessage("There is no assembly to save");
         return;
       }
 
-      string savePath = GetSavePath(FILTER_XML);
+      string savePath = _userInterface.GetSavePath(FileType.XML);
       if (savePath == null)
       {
         return;
@@ -67,12 +68,12 @@ namespace TypeAnalyzer.ViewModel
       XmlSerialization xmlSerialization = new XmlSerialization();
       xmlSerialization.WriteFile(_assemblyMetadata, savePath, "transform.xslt");
 
-      MessageBox.Show($"Succesfully serialized data to {savePath}", "Data serializaton", MessageBoxButton.OK, MessageBoxImage.Information);
+      _userInterface.DisplayInfoMessage($"Succesfully serialized data to {savePath}", "Data serializaton");
     }
 
     private void LoadXML()
     {
-      PathVariable = GetFilePath(FILTER_XML);
+      PathVariable = _userInterface.GetFilePath(FileType.XML);
       if (PathVariable == null)
       {
         return;
@@ -90,43 +91,5 @@ namespace TypeAnalyzer.ViewModel
       AssemblyModel.Clear();
       AssemblyModel.Add(model);
     }
-
-    private MessageBoxResult ShowErrorBox(string message)
-    {
-      return MessageBox.Show(message, "Error occured", MessageBoxButton.OK, MessageBoxImage.Error);
-    }
-
-    private string GetSavePath(string filter)
-    {
-      SaveFileDialog saveFileDialog = new SaveFileDialog()
-      {
-        Filter = filter,
-      };
-
-      if (saveFileDialog.ShowDialog() == true)
-      {
-        return saveFileDialog.FileName;
-      }
-
-      return null;
-    }
-
-    private string GetFilePath(string filter)
-    {
-      OpenFileDialog openFileDialog = new OpenFileDialog
-      {
-        Filter = filter,
-        Multiselect = false
-      };
-      if (openFileDialog.ShowDialog() == true)
-      {
-        return openFileDialog.FileName;
-      }
-
-      return null;
-    }
-
-    private const string FILTER_XML = "XML File (*.xml)|*.xml";
-    private const string FILTER_DLL = "DLL File (*.dll)|*.dll";
   }
 }

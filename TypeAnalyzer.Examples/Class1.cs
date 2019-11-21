@@ -44,11 +44,11 @@ namespace TypeAnalyzer.Examples
 
   internal static class ExtensionClass
   {
-    public static int[, ,] array = new int[1,2,3];
+    public static int[,,] array = new int[1, 2, 3];
     public static void ExtensionMethod(this Class1 obj)
     {
 
-    } 
+    }
   }
 
   internal struct TestStruct
@@ -69,14 +69,14 @@ namespace TypeAnalyzer.Examples
     {
       AnimalField = animalField;
     }
-    
+
     public string Concat(string a, string b)
     {
       return a + b;
     }
 
     public override void Abstract()
-    { 
+    {
     }
 
     public enum Animals
@@ -88,12 +88,12 @@ namespace TypeAnalyzer.Examples
     {
       private void PrivateMethod<T>(T a, T b)
       {
-        
+
       }
 
       private unsafe void PointerMagic(int* omg)
       {
-        
+
       }
     }
 
@@ -119,7 +119,7 @@ namespace TypeAnalyzer.Examples
       public abstract void Abstract();
       static void Static() { }
       public virtual void Virtual() { }
-      
+
     }
 
     public class MethodFinalTest : MethodTest

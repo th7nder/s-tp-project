@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\IUserInterface.cs" />
     <Compile Include="ViewModel\TreeItemViewModels\AssemblyViewModel.cs" />
     <Compile Include="ViewModel\TreeItemViewModels\AttributesViewModel.cs" />
     <Compile Include="ViewModel\TreeItemViewModels\AttributeViewModel.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="ViewModel\TypeAnalyzerViewModel.cs" />
     <Compile Include="ViewModel\MVVM\ViewModelBase.cs" />
     <Compile Include="ViewModel\TreeItemViewModels\TypeViewModel.cs" />
+    <Compile Include="View\WPFUserInterface.cs" />
     <Page Include="TypeAnalyzer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

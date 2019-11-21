@@ -28,7 +28,7 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       if (_typeMetadata.IsPlaceholder)
       {
         return;
-      } 
+      }
 
       Children.Add(new DetailViewModel("Type Kind: ", _typeMetadata.TypeKind.ToString()));
       Children.Add(new DetailViewModel("Access Level: ", _typeMetadata.AccessModifier.ToString()));
@@ -38,14 +38,14 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       {
         Children.Add(new DetailViewModel("Declaring Type: ", _typeMetadata.DeclaringType.Name, new TypeViewModel(_typeMetadata.DeclaringType)));
       }
-      
+
       Children.Add(new BaseTypesViewModel(_typeMetadata.BaseTypes));
 
       if (_typeMetadata.Constructors.Any())
       {
         Children.Add(new ConstructorsViewModel(_typeMetadata.Constructors));
       }
-      
+
       if (_typeMetadata.NestedTypes.Any())
       {
         Children.Add(new NestedTypesViewModel(_typeMetadata.NestedTypes));

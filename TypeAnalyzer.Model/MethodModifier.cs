@@ -15,7 +15,7 @@ namespace TypeAnalyzer.Model
         return MethodModifier.Abstract;
       if (methodInfo.IsVirtual)
         return MethodModifier.Virtual;
-      
+
       return MethodModifier.None;
     }
   }

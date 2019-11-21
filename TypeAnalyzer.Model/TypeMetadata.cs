@@ -10,7 +10,7 @@ namespace TypeAnalyzer.Model
   public class TypeMetadata
   {
     [DataMember]
-    public string Name { get; private set;  }
+    public string Name { get; private set; }
     [DataMember]
     public bool IsPlaceholder { get; private set; }
     [DataMember]
@@ -35,7 +35,7 @@ namespace TypeAnalyzer.Model
     public IEnumerable<TypeMetadata> TypeArguments { get; private set; } = new List<TypeMetadata>();
     [DataMember]
     public IEnumerable<TypeMetadata> GenericArguments { get; private set; } = new List<TypeMetadata>();
-    [DataMember] 
+    [DataMember]
     public AccessModifier AccessModifier { get; set; }
     [DataMember]
     public bool IsSealed { get; set; }
@@ -49,7 +49,7 @@ namespace TypeAnalyzer.Model
     public TypeMetadata DeclaringType { get; set; }
     [DataMember]
     public int ArrayRank { get; set; }
-    
+
     private TypeMetadata(TypeInfo typeInfo, bool isPlaceholder)
     {
       types[GetIdentifier(typeInfo)] = this;
@@ -66,7 +66,7 @@ namespace TypeAnalyzer.Model
                   .Concat(typeInfo.ImplementedInterfaces)
                   .Where(type => type != null)
                   .Select(type => Analyze(type.GetTypeInfo()));
-        
+
         NestedTypes = from nestedType in typeInfo.DeclaredNestedTypes
                       select Analyze(nestedType);
 
@@ -78,7 +78,7 @@ namespace TypeAnalyzer.Model
 
         Events = from eventItem in typeInfo.DeclaredEvents
                  select new EventMetadata(eventItem);
-        
+
         Attributes = from attribute in typeInfo.CustomAttributes
                      select AttributeMetadata.Analyze(attribute);
 
@@ -94,7 +94,7 @@ namespace TypeAnalyzer.Model
                        select Analyze(typeParameter.GetTypeInfo());
       TypeArguments = from typeArgument in typeInfo.GenericTypeArguments
                       select Analyze(typeArgument.GetTypeInfo());
-      
+
       AccessModifier = typeInfo.GetAccessModifier();
       GenericArguments = from generic in typeInfo.GetGenericArguments()
                          select Analyze(generic.GetTypeInfo());

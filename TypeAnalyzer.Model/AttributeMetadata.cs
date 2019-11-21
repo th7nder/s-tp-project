@@ -1,6 +1,5 @@
-﻿using System.Reflection;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.Serialization;
 
 namespace TypeAnalyzer.Model

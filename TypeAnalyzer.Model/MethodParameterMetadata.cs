@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Linq;
 
 namespace TypeAnalyzer.Model
 {
@@ -34,7 +34,7 @@ namespace TypeAnalyzer.Model
       string defaultValue = DefaultValue != null ? " = " + DefaultValue : "";
       if (Kind == MethodParameterKind.None)
         return $"{Type.Name} {Name}{defaultValue}";
-      
+
       return $"{Kind.ToString().ToLower()} {Type.Name} {Name}{defaultValue}";
     }
   }

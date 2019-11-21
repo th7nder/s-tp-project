@@ -8,9 +8,6 @@
         xmlns:treeViewModels="clr-namespace:TypeAnalyzer.ViewModel.TreeItemViewModels"
         mc:Ignorable="d"
         Title="Type Analyzer" Width="800" Height="600">
-    <Window.DataContext>
-        <viewModel:TypeAnalyzerViewModel/>
-    </Window.DataContext>
     <DockPanel> 
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">

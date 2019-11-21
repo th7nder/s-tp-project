@@ -9,14 +9,14 @@ namespace TypeAnalyzer.Model
 
   [DataContract(Namespace = "")]
   public class MethodMetadata : MethodBaseMetadata
-  { 
+  {
     [DataMember]
     public TypeMetadata ReturnType { get; private set; }
     [DataMember]
     public IEnumerable<TypeMetadata> GenericArguments { get; private set; }
     [DataMember]
     public bool IsExtensionMethod { get; private set; }
-    
+
     public MethodMetadata(MethodInfo method) : base(method)
     {
       IsExtensionMethod = method.IsDefined(typeof(ExtensionAttribute), false);

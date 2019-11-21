@@ -21,7 +21,7 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
       Value = value;
       ChildrenItems.Add(childrenItem);
     }
-    
+
     public DetailViewModel(string name, string value, List<TreeItemViewModel> childrenItems)
     {
       Name = name;

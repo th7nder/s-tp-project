@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TypeAnalyzer.Model
 {
@@ -24,8 +19,8 @@ namespace TypeAnalyzer.Model
         return TypeKind.ValueType;
       if (typeInfo.IsClass)
         return TypeKind.Class;
-      
-      
+
+
       return TypeKind.None;
     }
   }

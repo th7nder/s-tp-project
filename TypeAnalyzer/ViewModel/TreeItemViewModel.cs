@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using TypeAnalyzer.ViewModel.MVVM;
 
 namespace TypeAnalyzer.ViewModel
 {
-  public class TreeItemViewModel : ViewModelBase
+  public abstract class TreeItemViewModel : ViewModelBase
   {
 
     public string Name { get; set; }
@@ -30,6 +25,6 @@ namespace TypeAnalyzer.ViewModel
 
     private bool _wasBuilt = false;
     private bool _isExpanded = false;
-    protected virtual void BuildMyself() { }
+    protected abstract void BuildMyself();
   }
 }

@@ -53,7 +53,7 @@ namespace TypeAnalyzer.ViewModel.TreeItemViewModels
 
       if (_methodMetadata.Attributes.Any())
       {
-        Children.Add(new AttributesViewModel(_methodMetadata.Attributes));  
+        Children.Add(new AttributesViewModel(_methodMetadata.Attributes));
       }
     }
   }
