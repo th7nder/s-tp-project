@@ -132,12 +132,18 @@
                             if (node.innerText === '') {
                                 let id = node.getAttribute("id");
                                 let targetElement = source.getElementById(id);
-                                targetElement = targetElement.querySelector("div[type='Name']");
-                                id = targetElement.getAttribute("ref");
-                                targetElement = source.getElementById(id);
-
                                 if (targetElement) {
-                                    node.querySelector(":scope > .node-header").innerText = targetElement.innerText;
+                                    targetElement = targetElement.querySelector("div[type='Name']");
+                                    id = targetElement.getAttribute("ref");
+                                    targetElement = source.getElementById(id);
+
+                                    if (targetElement) {
+                                        node.querySelector(":scope > .node-header").innerText = targetElement.innerText;
+                                    } else {
+                                        console.log("Unable to find element: " + id);
+                                    }
+                                } else {
+                                    console.log("Unable to find element: " + id);
                                 }
                             }
                         }
@@ -165,16 +171,20 @@
                                     const ref = newChild.getAttribute("ref");
                                     const targetElement = source.getElementById(ref);
 
-                                    const header = targetElement.querySelector(":scope > .node-header");
-                                    if (header) {
-                                        const targetLabel = document.importNode(header, true);
-                                        newChild.appendChild(targetLabel);
-                                    } else {
-                                        newChild.innerText = targetElement.innerText;
-                                    }
+                                    if (targetElement) {
+                                        const header = targetElement.querySelector(":scope > .node-header");
+                                        if (header) {
+                                            const targetLabel = document.importNode(header, true);
+                                            newChild.appendChild(targetLabel);
+                                        } else {
+                                            newChild.innerText = targetElement.innerText;
+                                        }
 
-                                    newChild.setAttribute("id", ref);
-                                    newChild.removeAttribute("ref");
+                                        newChild.setAttribute("id", ref);
+                                        newChild.removeAttribute("ref");
+                                    } else {
+                                        console.log("Unable to find element: " + ref);
+                                    }
                                 }
 
                                 fixHeader(newChild);
@@ -210,6 +220,10 @@
 
                     document.addEventListener('click', function (event) {
                         const target = event.target.parentElement;
+                        if (target === null || !target.hasAttribute("opened")) {
+                            return;
+                        }
+
                         const isOpen = target.getAttribute("opened") === 'true';
 
                         if (isOpen) {
