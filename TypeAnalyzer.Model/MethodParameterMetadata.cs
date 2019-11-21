@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace TypeAnalyzer.Model
 {
-  [DataContract]
+  [DataContract(Namespace = "")]
   public class MethodParameterMetadata
   {
     [DataMember]
@@ -58,7 +58,7 @@ namespace TypeAnalyzer.Model
     }
   }
 
-  [DataContract]
+  [DataContract(Namespace = "")]
   public enum MethodParameterKind
   {
     [EnumMember]

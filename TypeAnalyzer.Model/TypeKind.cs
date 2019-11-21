@@ -31,7 +31,7 @@ namespace TypeAnalyzer.Model
   }
 
 
-  [DataContract]
+  [DataContract(Namespace = "")]
   public enum TypeKind
   {
     [EnumMember]

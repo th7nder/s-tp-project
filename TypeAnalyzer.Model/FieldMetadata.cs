@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 
 namespace TypeAnalyzer.Model
 {
-    [DataContract]
+    [DataContract(Namespace = "")]
     public class FieldMetadata
     {
         [DataMember]

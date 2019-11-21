@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace TypeAnalyzer.Model
 {
-  [DataContract(IsReference = true)]
+  [DataContract(IsReference = true, Namespace = "")]
   public class TypeMetadata
   {
     [DataMember]

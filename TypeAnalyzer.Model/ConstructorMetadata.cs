@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace TypeAnalyzer.Model
 {
-    [DataContract]
+    [DataContract(Namespace = "")]
     public class ConstructorMetadata : MethodBaseMetadata
     {
         public ConstructorMetadata(ConstructorInfo constructor) : base(constructor)

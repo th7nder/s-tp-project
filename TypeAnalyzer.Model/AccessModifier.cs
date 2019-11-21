@@ -65,7 +65,7 @@ namespace TypeAnalyzer.Model
     }
   }
 
-  [DataContract]
+  [DataContract(Namespace = "")]
   public enum AccessModifier
   {
     [EnumMember]

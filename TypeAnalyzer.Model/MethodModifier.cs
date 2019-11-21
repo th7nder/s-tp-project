@@ -21,7 +21,7 @@ namespace TypeAnalyzer.Model
   }
 
 
-  [DataContract]
+  [DataContract(Namespace = "")]
   public enum MethodModifier
   {
     [EnumMember]
