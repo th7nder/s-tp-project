@@ -11,7 +11,7 @@ namespace TypeAnalyzer.Model.Serialization
 {
   public class XmlSerialization
   {
-    public void WriteFile<Type>(Type dataObject, string path)
+    public void WriteFile<Type>(Type dataObject, string path, string stylesheetName)
     {
       if (string.IsNullOrEmpty(path))
         throw new ArgumentNullException("Path cannot be empty");
@@ -28,6 +28,7 @@ namespace TypeAnalyzer.Model.Serialization
       using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
       using (XmlWriter xmlWriter = XmlWriter.Create(fileStream, xmlWriterSettings))
       {
+        xmlWriter.WriteProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" " + string.Format("href=\"{0}\"", stylesheetName));
         dataContractSerializer.WriteObject(xmlWriter, dataObject);
       }
     }

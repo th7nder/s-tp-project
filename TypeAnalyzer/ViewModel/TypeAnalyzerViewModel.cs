@@ -65,7 +65,7 @@ namespace TypeAnalyzer.ViewModel
       }
 
       XmlSerialization xmlSerialization = new XmlSerialization();
-      xmlSerialization.WriteFile(_assemblyMetadata, savePath);
+      xmlSerialization.WriteFile(_assemblyMetadata, savePath, "transform.xslt");
 
       MessageBox.Show($"Succesfully serialized data to {savePath}", "Data serializaton", MessageBoxButton.OK, MessageBoxImage.Information);
     }
